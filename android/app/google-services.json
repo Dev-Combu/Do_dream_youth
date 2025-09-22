@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "297450037271",
+    "project_id": "do-dream-youth",
+    "storage_bucket": "do-dream-youth.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297450037271:android:fd4b11c7f0013a347d7c52",
+        "android_client_info": {
+          "package_name": "com.example.do_dream_youth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHRvjOiunIufYIiezOJxL5T1zu2iz-n_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
