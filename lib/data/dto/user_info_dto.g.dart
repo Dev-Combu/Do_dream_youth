@@ -7,20 +7,16 @@ part of 'user_info_dto.dart';
 // **************************************************************************
 
 _UserInfoDto _$UserInfoDtoFromJson(Map<String, dynamic> json) => _UserInfoDto(
-  uid: json['uid'] as String,
   role: json['role'] as String,
   name: json['name'] as String,
   christianName: json['christianName'] as String,
   phoneNumber: json['phoneNumber'] as String,
   department: json['department'] as String,
-  profile: json['profile'] == null
-      ? null
-      : ProfileDto.fromJson(json['profile'] as Map<String, dynamic>),
+  profile: json['profile'] as Map<String, dynamic>,
 );
 
 Map<String, dynamic> _$UserInfoDtoToJson(_UserInfoDto instance) =>
     <String, dynamic>{
-      'uid': instance.uid,
       'role': instance.role,
       'name': instance.name,
       'christianName': instance.christianName,
@@ -31,7 +27,7 @@ Map<String, dynamic> _$UserInfoDtoToJson(_UserInfoDto instance) =>
 
 StudentProfileDto _$StudentProfileDtoFromJson(Map<String, dynamic> json) =>
     StudentProfileDto(
-      shcool: json['shcool'] as String,
+      school: json['school'] as String,
       grade: json['grade'] as String,
       guardian: json['guardian'] as String,
       guardianPhoneNumber: json['guardianPhoneNumber'] as String,
@@ -40,7 +36,7 @@ StudentProfileDto _$StudentProfileDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$StudentProfileDtoToJson(StudentProfileDto instance) =>
     <String, dynamic>{
-      'shcool': instance.shcool,
+      'school': instance.school,
       'grade': instance.grade,
       'guardian': instance.guardian,
       'guardianPhoneNumber': instance.guardianPhoneNumber,

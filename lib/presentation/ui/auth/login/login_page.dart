@@ -62,23 +62,23 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                      //로그인 로직
-                      FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: pwdController.text,
-                          )
-                          .catchError((e) {
-                            //로그인 실패시
-                            print(e);
-                          })
-                          .then((value) {
-                            //로그인 성공했을시
-                            emailController.clear();
-                            pwdController.clear();
-                            print('로그인 성공');
-                          });
-                    
+                    //로그인 로직
+                    FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                          email: emailController.text,
+                          password: pwdController.text,
+                        )
+                        .catchError((e) {
+                          //로그인 실패시
+                          print(e);
+                        })
+                        .then((value) {
+                          //로그인 성공했을시
+                          emailController.clear();
+                          pwdController.clear();
+                          print('로그인 성공');
+                          context.go('/options');
+                        });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -87,8 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("로그인"
-                      ),
+                      child: Text("로그인"),
                     ),
                   ),
                 )

@@ -2,6 +2,7 @@ import 'package:do_dream_youth/presentation/ui/auth/login/login_page.dart';
 import 'package:do_dream_youth/presentation/ui/auth/userInfo/sign_up_info.dart';
 import 'package:do_dream_youth/presentation/ui/auth/sign_up/sign_up_page.dart';
 import 'package:do_dream_youth/presentation/ui/auth/sign_up/sign_up_role.dart';
+import 'package:do_dream_youth/presentation/ui/option/option_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,5 +28,6 @@ final router = GoRouter(
         return SignUpInfo(role: args['role']);
       },
     ),
+    GoRoute(path:'/options', builder: (context, state) => OptionPage(),)
   ],
 );

@@ -3,16 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_info_dto.freezed.dart';
 part 'user_info_dto.g.dart';
 
-@freezed
+@Freezed(toJson: true, fromJson: true)
 abstract class UserInfoDto with _$UserInfoDto {
-  factory UserInfoDto({
-  required String uid,
+  const factory UserInfoDto({
   required String role,
   required String name,
   required String christianName,
   required String phoneNumber,
   required String department,
-  ProfileDto? profile,
+  required Map<String, dynamic> profile,
 }) = _UserInfoDto;
 factory UserInfoDto.fromJson(Map<String, dynamic> json) =>
       _$UserInfoDtoFromJson(json);
@@ -20,10 +19,10 @@ factory UserInfoDto.fromJson(Map<String, dynamic> json) =>
 }
 
 // 추상 ProfileDto (union/sealed class 형태)
-@Freezed(unionKey: 'type') // JSON 직렬화 시 어떤 타입인지 구분
+@Freezed(unionKey: 'type', toJson: true, fromJson: true)
 abstract class ProfileDto with _$ProfileDto {
   const factory ProfileDto.student({
-    required String shcool,
+    required String school,
     required String grade,
     required String guardian,
     required String guardianPhoneNumber,

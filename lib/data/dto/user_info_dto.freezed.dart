@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserInfoDto {
 
- String get uid; String get role; String get name; String get christianName; String get phoneNumber; String get department; ProfileDto? get profile;
+ String get role; String get name; String get christianName; String get phoneNumber; String get department; Map<String, dynamic> get profile;
 /// Create a copy of UserInfoDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UserInfoDtoCopyWith<UserInfoDto> get copyWith => _$UserInfoDtoCopyWithImpl<User
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserInfoDto&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.role, role) || other.role == role)&&(identical(other.name, name) || other.name == name)&&(identical(other.christianName, christianName) || other.christianName == christianName)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.department, department) || other.department == department)&&(identical(other.profile, profile) || other.profile == profile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserInfoDto&&(identical(other.role, role) || other.role == role)&&(identical(other.name, name) || other.name == name)&&(identical(other.christianName, christianName) || other.christianName == christianName)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.department, department) || other.department == department)&&const DeepCollectionEquality().equals(other.profile, profile));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,role,name,christianName,phoneNumber,department,profile);
+int get hashCode => Object.hash(runtimeType,role,name,christianName,phoneNumber,department,const DeepCollectionEquality().hash(profile));
 
 @override
 String toString() {
-  return 'UserInfoDto(uid: $uid, role: $role, name: $name, christianName: $christianName, phoneNumber: $phoneNumber, department: $department, profile: $profile)';
+  return 'UserInfoDto(role: $role, name: $name, christianName: $christianName, phoneNumber: $phoneNumber, department: $department, profile: $profile)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $UserInfoDtoCopyWith<$Res>  {
   factory $UserInfoDtoCopyWith(UserInfoDto value, $Res Function(UserInfoDto) _then) = _$UserInfoDtoCopyWithImpl;
 @useResult
 $Res call({
- String uid, String role, String name, String christianName, String phoneNumber, String department, ProfileDto? profile
+ String role, String name, String christianName, String phoneNumber, String department, Map<String, dynamic> profile
 });
 
 
-$ProfileDtoCopyWith<$Res>? get profile;
+
 
 }
 /// @nodoc
@@ -65,31 +65,18 @@ class _$UserInfoDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserInfoDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = null,Object? profile = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = null,Object? profile = null,}) {
   return _then(_self.copyWith(
-uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,christianName: null == christianName ? _self.christianName : christianName // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,department: null == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
-as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
-as ProfileDto?,
+as String,profile: null == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,
   ));
 }
-/// Create a copy of UserInfoDto
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ProfileDtoCopyWith<$Res>? get profile {
-    if (_self.profile == null) {
-    return null;
-  }
 
-  return $ProfileDtoCopyWith<$Res>(_self.profile!, (value) {
-    return _then(_self.copyWith(profile: value));
-  });
-}
 }
 
 
@@ -171,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uid,  String role,  String name,  String christianName,  String phoneNumber,  String department,  ProfileDto? profile)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String role,  String name,  String christianName,  String phoneNumber,  String department,  Map<String, dynamic> profile)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserInfoDto() when $default != null:
-return $default(_that.uid,_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
+return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
   return orElse();
 
 }
@@ -192,10 +179,10 @@ return $default(_that.uid,_that.role,_that.name,_that.christianName,_that.phoneN
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uid,  String role,  String name,  String christianName,  String phoneNumber,  String department,  ProfileDto? profile)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String role,  String name,  String christianName,  String phoneNumber,  String department,  Map<String, dynamic> profile)  $default,) {final _that = this;
 switch (_that) {
 case _UserInfoDto():
-return $default(_that.uid,_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
+return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -212,10 +199,10 @@ return $default(_that.uid,_that.role,_that.name,_that.christianName,_that.phoneN
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uid,  String role,  String name,  String christianName,  String phoneNumber,  String department,  ProfileDto? profile)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String role,  String name,  String christianName,  String phoneNumber,  String department,  Map<String, dynamic> profile)?  $default,) {final _that = this;
 switch (_that) {
 case _UserInfoDto() when $default != null:
-return $default(_that.uid,_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
+return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
   return null;
 
 }
@@ -227,16 +214,21 @@ return $default(_that.uid,_that.role,_that.name,_that.christianName,_that.phoneN
 @JsonSerializable()
 
 class _UserInfoDto implements UserInfoDto {
-   _UserInfoDto({required this.uid, required this.role, required this.name, required this.christianName, required this.phoneNumber, required this.department, this.profile});
+  const _UserInfoDto({required this.role, required this.name, required this.christianName, required this.phoneNumber, required this.department, required final  Map<String, dynamic> profile}): _profile = profile;
   factory _UserInfoDto.fromJson(Map<String, dynamic> json) => _$UserInfoDtoFromJson(json);
 
-@override final  String uid;
 @override final  String role;
 @override final  String name;
 @override final  String christianName;
 @override final  String phoneNumber;
 @override final  String department;
-@override final  ProfileDto? profile;
+ final  Map<String, dynamic> _profile;
+@override Map<String, dynamic> get profile {
+  if (_profile is EqualUnmodifiableMapView) return _profile;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_profile);
+}
+
 
 /// Create a copy of UserInfoDto
 /// with the given fields replaced by the non-null parameter values.
@@ -251,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserInfoDto&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.role, role) || other.role == role)&&(identical(other.name, name) || other.name == name)&&(identical(other.christianName, christianName) || other.christianName == christianName)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.department, department) || other.department == department)&&(identical(other.profile, profile) || other.profile == profile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserInfoDto&&(identical(other.role, role) || other.role == role)&&(identical(other.name, name) || other.name == name)&&(identical(other.christianName, christianName) || other.christianName == christianName)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.department, department) || other.department == department)&&const DeepCollectionEquality().equals(other._profile, _profile));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,uid,role,name,christianName,phoneNumber,department,profile);
+int get hashCode => Object.hash(runtimeType,role,name,christianName,phoneNumber,department,const DeepCollectionEquality().hash(_profile));
 
 @override
 String toString() {
-  return 'UserInfoDto(uid: $uid, role: $role, name: $name, christianName: $christianName, phoneNumber: $phoneNumber, department: $department, profile: $profile)';
+  return 'UserInfoDto(role: $role, name: $name, christianName: $christianName, phoneNumber: $phoneNumber, department: $department, profile: $profile)';
 }
 
 
@@ -271,11 +263,11 @@ abstract mixin class _$UserInfoDtoCopyWith<$Res> implements $UserInfoDtoCopyWith
   factory _$UserInfoDtoCopyWith(_UserInfoDto value, $Res Function(_UserInfoDto) _then) = __$UserInfoDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String uid, String role, String name, String christianName, String phoneNumber, String department, ProfileDto? profile
+ String role, String name, String christianName, String phoneNumber, String department, Map<String, dynamic> profile
 });
 
 
-@override $ProfileDtoCopyWith<$Res>? get profile;
+
 
 }
 /// @nodoc
@@ -288,32 +280,19 @@ class __$UserInfoDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserInfoDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = null,Object? profile = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = null,Object? profile = null,}) {
   return _then(_UserInfoDto(
-uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,christianName: null == christianName ? _self.christianName : christianName // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,department: null == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
-as String,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
-as ProfileDto?,
+as String,profile: null == profile ? _self._profile : profile // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,
   ));
 }
 
-/// Create a copy of UserInfoDto
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ProfileDtoCopyWith<$Res>? get profile {
-    if (_self.profile == null) {
-    return null;
-  }
 
-  return $ProfileDtoCopyWith<$Res>(_self.profile!, (value) {
-    return _then(_self.copyWith(profile: value));
-  });
-}
 }
 
 ProfileDto _$ProfileDtoFromJson(
@@ -484,10 +463,10 @@ return teacher(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String shcool,  String grade,  String guardian,  String guardianPhoneNumber)?  student,TResult Function( String grade,  int careerYears)?  teacher,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String school,  String grade,  String guardian,  String guardianPhoneNumber)?  student,TResult Function( String grade,  int careerYears)?  teacher,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case StudentProfileDto() when student != null:
-return student(_that.shcool,_that.grade,_that.guardian,_that.guardianPhoneNumber);case TeacherProfileDto() when teacher != null:
+return student(_that.school,_that.grade,_that.guardian,_that.guardianPhoneNumber);case TeacherProfileDto() when teacher != null:
 return teacher(_that.grade,_that.careerYears);case _:
   return orElse();
 
@@ -506,10 +485,10 @@ return teacher(_that.grade,_that.careerYears);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String shcool,  String grade,  String guardian,  String guardianPhoneNumber)  student,required TResult Function( String grade,  int careerYears)  teacher,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String school,  String grade,  String guardian,  String guardianPhoneNumber)  student,required TResult Function( String grade,  int careerYears)  teacher,}) {final _that = this;
 switch (_that) {
 case StudentProfileDto():
-return student(_that.shcool,_that.grade,_that.guardian,_that.guardianPhoneNumber);case TeacherProfileDto():
+return student(_that.school,_that.grade,_that.guardian,_that.guardianPhoneNumber);case TeacherProfileDto():
 return teacher(_that.grade,_that.careerYears);case _:
   throw StateError('Unexpected subclass');
 
@@ -527,10 +506,10 @@ return teacher(_that.grade,_that.careerYears);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String shcool,  String grade,  String guardian,  String guardianPhoneNumber)?  student,TResult? Function( String grade,  int careerYears)?  teacher,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String school,  String grade,  String guardian,  String guardianPhoneNumber)?  student,TResult? Function( String grade,  int careerYears)?  teacher,}) {final _that = this;
 switch (_that) {
 case StudentProfileDto() when student != null:
-return student(_that.shcool,_that.grade,_that.guardian,_that.guardianPhoneNumber);case TeacherProfileDto() when teacher != null:
+return student(_that.school,_that.grade,_that.guardian,_that.guardianPhoneNumber);case TeacherProfileDto() when teacher != null:
 return teacher(_that.grade,_that.careerYears);case _:
   return null;
 
@@ -543,10 +522,10 @@ return teacher(_that.grade,_that.careerYears);case _:
 @JsonSerializable()
 
 class StudentProfileDto implements ProfileDto {
-  const StudentProfileDto({required this.shcool, required this.grade, required this.guardian, required this.guardianPhoneNumber, final  String? $type}): $type = $type ?? 'student';
+  const StudentProfileDto({required this.school, required this.grade, required this.guardian, required this.guardianPhoneNumber, final  String? $type}): $type = $type ?? 'student';
   factory StudentProfileDto.fromJson(Map<String, dynamic> json) => _$StudentProfileDtoFromJson(json);
 
- final  String shcool;
+ final  String school;
 @override final  String grade;
  final  String guardian;
  final  String guardianPhoneNumber;
@@ -568,16 +547,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StudentProfileDto&&(identical(other.shcool, shcool) || other.shcool == shcool)&&(identical(other.grade, grade) || other.grade == grade)&&(identical(other.guardian, guardian) || other.guardian == guardian)&&(identical(other.guardianPhoneNumber, guardianPhoneNumber) || other.guardianPhoneNumber == guardianPhoneNumber));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StudentProfileDto&&(identical(other.school, school) || other.school == school)&&(identical(other.grade, grade) || other.grade == grade)&&(identical(other.guardian, guardian) || other.guardian == guardian)&&(identical(other.guardianPhoneNumber, guardianPhoneNumber) || other.guardianPhoneNumber == guardianPhoneNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,shcool,grade,guardian,guardianPhoneNumber);
+int get hashCode => Object.hash(runtimeType,school,grade,guardian,guardianPhoneNumber);
 
 @override
 String toString() {
-  return 'ProfileDto.student(shcool: $shcool, grade: $grade, guardian: $guardian, guardianPhoneNumber: $guardianPhoneNumber)';
+  return 'ProfileDto.student(school: $school, grade: $grade, guardian: $guardian, guardianPhoneNumber: $guardianPhoneNumber)';
 }
 
 
@@ -588,7 +567,7 @@ abstract mixin class $StudentProfileDtoCopyWith<$Res> implements $ProfileDtoCopy
   factory $StudentProfileDtoCopyWith(StudentProfileDto value, $Res Function(StudentProfileDto) _then) = _$StudentProfileDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String shcool, String grade, String guardian, String guardianPhoneNumber
+ String school, String grade, String guardian, String guardianPhoneNumber
 });
 
 
@@ -605,9 +584,9 @@ class _$StudentProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? shcool = null,Object? grade = null,Object? guardian = null,Object? guardianPhoneNumber = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? school = null,Object? grade = null,Object? guardian = null,Object? guardianPhoneNumber = null,}) {
   return _then(StudentProfileDto(
-shcool: null == shcool ? _self.shcool : shcool // ignore: cast_nullable_to_non_nullable
+school: null == school ? _self.school : school // ignore: cast_nullable_to_non_nullable
 as String,grade: null == grade ? _self.grade : grade // ignore: cast_nullable_to_non_nullable
 as String,guardian: null == guardian ? _self.guardian : guardian // ignore: cast_nullable_to_non_nullable
 as String,guardianPhoneNumber: null == guardianPhoneNumber ? _self.guardianPhoneNumber : guardianPhoneNumber // ignore: cast_nullable_to_non_nullable
