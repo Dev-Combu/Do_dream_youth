@@ -114,15 +114,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                 },
               ),
             ),
-            ElevatedButton(
-  onPressed: () {
-    setState(() {
-      _focusedDay = DateTime.now();   // 오늘 날짜로 포커스 이동
-      _selectedDay = DateTime.now();  // 선택 날짜도 오늘로 변경
-    });
-  },
-  child: Text('오늘'),
-),
+
             Expanded(
               child: ListView.separated(
                 itemCount: _selectedDay != null
