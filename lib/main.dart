@@ -4,6 +4,7 @@ import 'package:do_dream_youth/presentation/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async{
 
@@ -23,6 +24,15 @@ class MyApp extends StatelessWidget {
       title: 'Record Reading',
       routerConfig: router,
       theme: AppTheme.lightTheme,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko', 'KR'), // 한국어
+      ],
+      locale: const Locale('ko', 'KR'),
     );
   }
 }
