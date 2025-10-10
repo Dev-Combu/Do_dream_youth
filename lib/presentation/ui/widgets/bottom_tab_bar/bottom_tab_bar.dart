@@ -48,7 +48,7 @@ class _BottomTabBarState extends ConsumerState<BottomTabBar> {
           onTap: (value) => _handleNavigation(context, ref, value),
           items: [
             _buildNavItem(
-                icon: Icons.book, label: 'BookCase', isSelected: currentPage == schedule),
+                icon: Icons.book, label: 'Schedule', isSelected: currentPage == schedule),
             _buildNavItem(
                 icon: Icons.home, label: 'Option', isSelected: currentPage == option),
           ],

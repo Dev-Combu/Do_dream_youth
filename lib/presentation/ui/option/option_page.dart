@@ -29,19 +29,6 @@ class OptionPage extends StatelessWidget{
                   height: 50,),
                   Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () async{
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      height: 20,
-                      child: Text("저장된 uid 확인 버튼"),
-                    
-                    ),
-                  ),
                 )
               ],
             ),
