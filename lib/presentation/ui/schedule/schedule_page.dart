@@ -1,4 +1,5 @@
 import 'package:do_dream_youth/domain/entity/schedule_entity.dart';
+import 'package:do_dream_youth/presentation/ui/schedule/schedule_detail/schdeule_detail_page.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -126,17 +127,28 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                   final result = _selectedDay != null
                       ? _getEventsForDay(_selectedDay!)[index]
                       : _getEventsForDay(_focusedDay)[index];
-                  return ListTile(
-                    title: Text(result.name),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${formattedDate(result.startDate)} - ${formattedDate(result.endDate)}',
-                        ),
-                        const SizedBox(height: 4),
-                        Text(result.target),
-                      ],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SchdeuleDetailPage(
+                        name: result.name,
+                        description: result.description,
+                        startDate: formattedDate(result.startDate),
+                        endDate: formattedDate(result.endDate),
+                        target: result.target,
+                      ),));
+                    },
+                    child: ListTile(
+                      title: Text(result.name),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${formattedDate(result.startDate)} - ${formattedDate(result.endDate)}',
+                          ),
+                          const SizedBox(height: 4),
+                          Text(result.target),
+                        ],
+                      ),
                     ),
                   );
                 },
