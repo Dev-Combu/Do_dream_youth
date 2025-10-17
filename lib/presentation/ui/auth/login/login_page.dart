@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                           emailController.clear();
                           pwdController.clear();
                           print('로그인 성공');
-                          context.go('/options');
+                          context.go('/option');
                         });
                   },
                   child: Container(
