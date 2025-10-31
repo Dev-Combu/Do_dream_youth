@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:do_dream_youth/domain/entity/user_info_entity.dart';
-import 'package:do_dream_youth/presentation/ui/auth/userInfo/user_info_provider.dart';
+import 'package:do_dream_youth/presentation/ui/auth/sign_up_info/sign_up_info_provider.dart';
+import 'package:do_dream_youth/presentation/ui/auth/sign_up_info/sign_up_info_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -36,41 +37,19 @@ class _SignUpInfoState extends ConsumerState<SignUpInfo> {
   ];
   String gradeValue = grade.first;
 
-  static List<String> department = <String>[
-    '전례',
-    '성가',
-    '둘다',
-    '없음',
-  ];
+  static List<String> department = <String>['전례', '성가', '둘다', '없음'];
   String departmentValue = department.first;
 
   static List<String> guardian = <String>['부', '모', '기타'];
   String guardianValue = guardian.first;
 
-  Future<void> createUserInfo() async {
+  Future<void> createUserInfo(UserInfoEntity userInfoEntity) async {
     try {
-      await ref.read(userInfoRepositoryProvider).createUserInfo(
-        UserInfoEntity(
-          role: widget.role,
-          name: nameController.text,
-          christianName: csnameController.text,
-          phoneNumber: phoneController.text,
-          department: departmentValue,
-          profile: widget.role == 'teacher'
-              ? TeacherProfileEntity(
-                  grade: gradeValue,
-                  careerYears: int.parse(careerYearsController.text),
-                )
-              : StudentProfileEntity(
-                  school: schoolController.text,
-                  grade: gradeValue,
-                  guardian: guardianValue,
-                  guardianPhoneNumber: gdphoneController.text,
-                ),
-        ),
-      );
+      await ref
+          .read(createUserInfoViewModelProvider.notifier)
+          .createUserInfo(userInfoEntity);
       log.i("회원정보 생성 완료");
-    }catch (e) {
+    } catch (e) {
       log.i("회원정보 생성 실패 : $e");
     }
   }
@@ -107,24 +86,26 @@ class _SignUpInfoState extends ConsumerState<SignUpInfo> {
                       TextField(controller: careerYearsController),
                       Text("담당 학년"),
                       DropdownButton<String>(
-                            value: gradeValue,
-                            items: grade
-                                .map(
-                                  (e) => DropdownMenuItem<String>(
-                                    value: e,
-                                    child: Text(e),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (String? v) {
-                              setState(() => gradeValue = v!);
-                            },
-                          ),
+                        value: gradeValue,
+                        items: grade
+                            .map(
+                              (e) => DropdownMenuItem<String>(
+                                value: e,
+                                child: Text(e),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (String? v) {
+                          setState(() => gradeValue = v!);
+                        },
+                      ),
                     ] else ...[
                       Text("학교"),
                       Row(
                         children: [
-                          Expanded(child: TextField(controller: schoolController)),
+                          Expanded(
+                            child: TextField(controller: schoolController),
+                          ),
                           SizedBox(width: 12),
                           DropdownButton<String>(
                             value: gradeValue,
@@ -160,33 +141,57 @@ class _SignUpInfoState extends ConsumerState<SignUpInfo> {
                             },
                           ),
                           SizedBox(width: 12),
-                          Expanded(child: TextField(controller: gdphoneController)),
+                          Expanded(
+                            child: TextField(controller: gdphoneController),
+                          ),
                         ],
                       ),
                     ],
                     Text("담당 부서"),
-                      DropdownButton<String>(
-                            value: departmentValue,
-                            items: department
-                                .map(
-                                  (e) => DropdownMenuItem<String>(
-                                    value: e,
-                                    child: Text(e),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (String? v) {
-                              setState(() => departmentValue = v!);
-                            },
-                          ),
+                    DropdownButton<String>(
+                      value: departmentValue,
+                      items: department
+                          .map(
+                            (e) => DropdownMenuItem<String>(
+                              value: e,
+                              child: Text(e),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (String? v) {
+                        setState(() => departmentValue = v!);
+                      },
+                    ),
                   ],
                 ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      createUserInfo().then((value) => context.go('/option'));
-                    }, child: Text("회원정보 저장"),
-                  ),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    createUserInfo(
+                      UserInfoEntity(
+                        role: widget.role,
+                        name: nameController.text,
+                        christianName: csnameController.text,
+                        phoneNumber: phoneController.text,
+                        department: departmentValue,
+                        profile: widget.role == 'teacher'
+                            ? TeacherProfileEntity(
+                                grade: gradeValue,
+                                careerYears: int.parse(
+                                  careerYearsController.text,
+                                ),
+                              )
+                            : StudentProfileEntity(
+                                school: schoolController.text,
+                                grade: gradeValue,
+                                guardian: guardianValue,
+                                guardianPhoneNumber: gdphoneController.text,
+                              ),
+                      ),
+                    ).then((value) => context.go('/option'));
+                  },
+                  child: Text("회원정보 저장"),
+                ),
               ],
             ),
           ),

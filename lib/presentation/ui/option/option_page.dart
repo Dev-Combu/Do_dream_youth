@@ -18,21 +18,28 @@ class OptionPage extends StatelessWidget{
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                height: 50,
+                child: GestureDetector(
+                  onTap: () {
+                    context.go('/my_info');
+                  },
+                  child: Center(
+                    child: Text('내 정보 보기'),
                   ),
-                  height: 50,),
-                  Padding(
-                  padding: const EdgeInsets.all(8.0),
-                )
-              ],
-            ),
+                ),
+              ),
+              Padding(padding: const EdgeInsets.all(8.0)),
+            ],
           ),
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
