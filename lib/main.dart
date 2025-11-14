@@ -8,7 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async{
 
-    //firebase 초기화
+  //firebase 초기화
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(ProviderScope(child: MyApp()));
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Record Reading',
+      title: 'Do_Dream_Youth',
       routerConfig: router,
       theme: AppTheme.lightTheme,
       localizationsDelegates: const [

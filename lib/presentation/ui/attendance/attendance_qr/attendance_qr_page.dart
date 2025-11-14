@@ -2,11 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class AttendanceQrPage extends StatelessWidget{
-  final String sessionId;
+class AttendanceQrPage extends StatefulWidget{
 
-  const AttendanceQrPage({super.key, required this.sessionId});
+  const AttendanceQrPage({super.key});
 
+  @override
+  State<AttendanceQrPage> createState() => _AttendanceQrPageState();
+}
+
+class _AttendanceQrPageState extends State<AttendanceQrPage> {
+  final sessionId = '1234';
 
   @override
   Widget build(BuildContext context) {

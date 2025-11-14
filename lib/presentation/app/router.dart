@@ -144,7 +144,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/attendance_qr',
-      builder: (context, state) => AttendanceQrPage(sessionId: '1234',),
+      builder: (context, state) => AttendanceQrPage(),
     ),
     GoRoute(
       path: '/attendance_check',

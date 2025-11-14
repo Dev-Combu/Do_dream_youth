@@ -1,1 +1,47 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"do-dream-youth","appId":"1:297450037271:android:fd4b11c7f0013a347d7c52","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"do-dream-youth","appId":"1:297450037271:ios:417d1f4195be92267d7c52","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"do-dream-youth","configurations":{"android":"1:297450037271:android:fd4b11c7f0013a347d7c52","ios":"1:297450037271:ios:417d1f4195be92267d7c52"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "do-dream-youth",
+          "appId": "1:297450037271:android:fd4b11c7f0013a347d7c52",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "do-dream-youth",
+          "appId": "1:297450037271:ios:417d1f4195be92267d7c52",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "do-dream-youth",
+          "configurations": {
+            "android": "1:297450037271:android:fd4b11c7f0013a347d7c52",
+            "ios": "1:297450037271:ios:417d1f4195be92267d7c52"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "disallowLegacyRuntimeConfig": true,
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
+}
