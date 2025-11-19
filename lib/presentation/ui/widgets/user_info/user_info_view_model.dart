@@ -20,9 +20,9 @@ class UserInfoViewModel extends Notifier<UserInfoEntity?> {
     state = data;
   }
 
-  // Future<void> clearUserInfo() async {
-  //   state = null;
-  // }
+  Future<void> clearUserInfo() async {
+    state = null;
+  }
 }
 
 final userInfoViewModelProvider = NotifierProvider<UserInfoViewModel, UserInfoEntity?>(
