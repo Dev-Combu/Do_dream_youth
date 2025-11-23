@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:uuid/uuid.dart';
 
-class AttendanceTeacherDataSourceImpl extends AttendanceTeacherDataSource{
+class AttendanceTeacherDataSourceImpl implements AttendanceTeacherDataSource{
  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   Logger log = Logger();

@@ -1,11 +1,19 @@
+import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class AttendancePage extends StatelessWidget {
+class AttendancePage extends ConsumerStatefulWidget {
   const AttendancePage({super.key});
 
   @override
+  ConsumerState<AttendancePage> createState() => _AttendancePageState();
+}
+
+class _AttendancePageState extends ConsumerState<AttendancePage> {
+  @override
   Widget build(BuildContext context) {
+    final user_role = ref.read(userInfoViewModelProvider)?.role;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -32,8 +40,9 @@ class AttendancePage extends StatelessWidget {
               fit: FlexFit.tight,
               child: GestureDetector(
                 onTap: () {
-                  context.push('/attendance_qr');
-
+                  user_role == "student"
+                  ? context.push('/attendance_check')
+                  : context.push('/attendance_qr');
                 },
                 child: Container(
                   decoration: BoxDecoration(

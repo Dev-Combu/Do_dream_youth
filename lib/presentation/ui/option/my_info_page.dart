@@ -1,4 +1,5 @@
 import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +12,18 @@ class MyInfoPage extends ConsumerStatefulWidget{
 }
 
 class _MyInfoPageState extends ConsumerState<MyInfoPage> {
+  final user = FirebaseAuth.instance.currentUser;
+
+  @override
+  void initState(){
+    super.initState();
+    loadUserInfo();
+  }
+
+  Future<void> loadUserInfo() async {
+    await ref.read(userInfoViewModelProvider.notifier).fetchUserInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     final userinfo = ref.watch(userInfoViewModelProvider);
@@ -26,7 +39,12 @@ class _MyInfoPageState extends ConsumerState<MyInfoPage> {
         backgroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: Center(
-        child: Text(userinfo?.christianName ?? 'No user info'),
+        child: Column(
+          children: [
+            Text(userinfo?.christianName ?? 'No user info'),
+            Text(user!.uid),
+          ],
+        ),
       ),
     );
   }
