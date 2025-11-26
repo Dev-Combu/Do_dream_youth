@@ -13,7 +13,7 @@ class AttendancePage extends ConsumerStatefulWidget {
 class _AttendancePageState extends ConsumerState<AttendancePage> {
   @override
   Widget build(BuildContext context) {
-    final user_role = ref.read(userInfoViewModelProvider)?.role;
+    final userRole = ref.read(userInfoViewModelProvider).value?.role;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -40,7 +40,7 @@ class _AttendancePageState extends ConsumerState<AttendancePage> {
               fit: FlexFit.tight,
               child: GestureDetector(
                 onTap: () {
-                  user_role == "student"
+                  userRole == "student"
                   ? context.push('/attendance_check')
                   : context.push('/attendance_qr');
                 },

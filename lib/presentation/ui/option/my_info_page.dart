@@ -17,16 +17,11 @@ class _MyInfoPageState extends ConsumerState<MyInfoPage> {
   @override
   void initState(){
     super.initState();
-    loadUserInfo();
-  }
-
-  Future<void> loadUserInfo() async {
-    await ref.read(userInfoViewModelProvider.notifier).fetchUserInfo();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userinfo = ref.watch(userInfoViewModelProvider);
+    final userinfo = ref.watch(userInfoViewModelProvider).value;
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(

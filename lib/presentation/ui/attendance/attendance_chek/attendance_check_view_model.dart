@@ -13,7 +13,7 @@ Future<void> attendance(AttendanceStEntity attendanceStEntity) async{
     await ref.read(atUsecaseProvider).attendanceSt(attendanceStEntity);
     state = attendanceStEntity;
   }catch(e){
-    // 에러 처리 로직 추가
+    rethrow;
   }
 }
 

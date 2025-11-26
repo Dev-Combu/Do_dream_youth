@@ -23,7 +23,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 
   Future<void> loadUserInfo() async {
-    await ref.read(userInfoViewModelProvider.notifier).fetchUserInfo();
+  ref.watch(userInfoViewModelProvider).value;
   }
 
   @override
