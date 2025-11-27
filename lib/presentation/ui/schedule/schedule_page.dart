@@ -117,42 +117,54 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
             ),
 
             Expanded(
-              child: ListView.separated(
-                itemCount: _selectedDay != null
-                    ? _getEventsForDay(_selectedDay!).length
-                    : _getEventsForDay(_focusedDay).length,
-                separatorBuilder: (_, __) =>
-                    const Divider(color: Color(0xFFE5E8EB)),
-                itemBuilder: (context, index) {
-                  final result = _selectedDay != null
-                      ? _getEventsForDay(_selectedDay!)[index]
-                      : _getEventsForDay(_focusedDay)[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SchdeuleDetailPage(
-                        name: result.name,
-                        description: result.description,
-                        startDate: formattedDate(result.startDate),
-                        endDate: formattedDate(result.endDate),
-                        target: result.target,
-                      ),));
-                    },
-                    child: ListTile(
-                      title: Text(result.name),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${formattedDate(result.startDate)} - ${formattedDate(result.endDate)}',
-                          ),
-                          const SizedBox(height: 4),
-                          Text(result.target),
-                        ],
+              child: _getEventsForDay(_selectedDay ?? _focusedDay).isEmpty
+                  ? Center(
+                      child: Text(
+                        '선택한 날짜에 일정이 없습니다.',
+                        style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                       ),
+                    )
+                  : ListView.separated(
+                      itemCount: _selectedDay != null
+                          ? _getEventsForDay(_selectedDay!).length
+                          : _getEventsForDay(_focusedDay).length,
+                      separatorBuilder: (_, __) =>
+                          const Divider(color: Color(0xFFE5E8EB)),
+                      itemBuilder: (context, index) {
+                        final result = _selectedDay != null
+                            ? _getEventsForDay(_selectedDay!)[index]
+                            : _getEventsForDay(_focusedDay)[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SchdeuleDetailPage(
+                                  name: result.name,
+                                  description: result.description,
+                                  startDate: formattedDate(result.startDate),
+                                  endDate: formattedDate(result.endDate),
+                                  target: result.target,
+                                ),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            title: Text(result.name),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${formattedDate(result.startDate)} - ${formattedDate(result.endDate)}',
+                                ),
+                                const SizedBox(height: 4),
+                                Text(result.target),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
             ),
           ],
         ),

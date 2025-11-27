@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 // 상수 선언으로 가독성 향상
 
 const int schedule = 0;
-const int option = 1;
+const int attendance = 1;
+const int option = 2;
 
 class BottomTabBar extends ConsumerStatefulWidget {
   const BottomTabBar({super.key});
@@ -20,7 +21,7 @@ class _BottomTabBarState extends ConsumerState<BottomTabBar> {
   void _handleNavigation(BuildContext context, WidgetRef ref, int value) {
     final currentPage = ref.watch(bottomNavigationProvider);
 
-    final routes = ['/schedule','/option'];
+    final routes = ['/schedule','/attendance','/option'];
     if (currentPage != value) {
       context.go(routes[value]);
       ref.read(bottomNavigationProvider.notifier).updatePage(value);
@@ -48,7 +49,9 @@ class _BottomTabBarState extends ConsumerState<BottomTabBar> {
           onTap: (value) => _handleNavigation(context, ref, value),
           items: [
             _buildNavItem(
-                icon: Icons.book, label: 'Schedule', isSelected: currentPage == schedule),
+                icon: Icons.calendar_month, label: 'Schedule', isSelected: currentPage == schedule),
+            _buildNavItem(
+                icon: Icons.fact_check, label: 'Attendance', isSelected: currentPage == attendance),
             _buildNavItem(
                 icon: Icons.home, label: 'Option', isSelected: currentPage == option),
           ],

@@ -1,24 +1,35 @@
+import 'package:do_dream_youth/presentation/ui/auth/login/log_in_view_model.dart';
+import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginPage extends StatefulWidget{
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController pwdController = TextEditingController();
+
+  Future<void> emailSignUp(String email, String pwd) async {
+    await ref.read(logInViewModelProvider.notifier).logIn(email, pwd);
+    emailController.clear();
+    pwdController.clear();
+  }
+
+  Future<void> loadUserInfo() async {
+  ref.watch(userInfoViewModelProvider).value;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
+      appBar: AppBar(title: Text('Login')),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -46,9 +57,11 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         //회원가입 페이지로 이동
-                      context.go("/signuprole");
+                        
+                        context.go("/signuprole");
+                        print("회원가입 페이지로 이동");
                       },
                       child: Container(
                         color: Colors.white,
@@ -62,41 +75,25 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    //로그인 로직
-                    FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                          email: emailController.text,
-                          password: pwdController.text,
-                        )
-                        .catchError((e) {
-                          //로그인 실패시
-                          print(e);
-                        })
-                        .then((value) {
-                          //로그인 성공했을시
-                          emailController.clear();
-                          pwdController.clear();
-                          print('로그인 성공');
-                          context.go('/option');
-                        });
+                    emailSignUp(emailController.text, pwdController.text)
+                    .then((_) => loadUserInfo());
                   },
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(),
-                      borderRadius: BorderRadius.circular(8)
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text("로그인"),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
       ),
-    
     );
   }
 }

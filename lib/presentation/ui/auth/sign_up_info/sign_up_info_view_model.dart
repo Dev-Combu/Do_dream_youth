@@ -1,6 +1,6 @@
 import 'package:do_dream_youth/domain/entity/email_auth_entity.dart';
 import 'package:do_dream_youth/domain/entity/user_info_entity.dart';
-import 'package:do_dream_youth/presentation/ui/auth/userInfo/user_info_provider.dart';
+import 'package:do_dream_youth/presentation/ui/auth/sign_up_info/sign_up_info_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserInfoViewModel extends Notifier<EmailAuthEntity?>{
@@ -9,12 +9,12 @@ class UserInfoViewModel extends Notifier<EmailAuthEntity?>{
     return null;
   }
 
-  Future<void> createUserInfo(String uid, UserInfoEntity userInfoEntity) async{
+  Future<void> createUserInfo(UserInfoEntity userInfoEntity) async{
     return await ref.read(userInfoUsecaseProvider).createUserInfo(userInfoEntity);
   }
 
 }
 
-final userInfoViewModelProvider = NotifierProvider<UserInfoViewModel, EmailAuthEntity?>(
+final createUserInfoViewModelProvider = NotifierProvider<UserInfoViewModel, EmailAuthEntity?>(
   () => UserInfoViewModel(),
 );

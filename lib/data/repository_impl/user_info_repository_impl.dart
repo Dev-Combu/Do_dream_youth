@@ -40,4 +40,70 @@ class UserInfoRepositoryImpl implements UserInfoRepository {
     );
     return _userInfoDataSource.createUserInfo(userInfoDto);
   }
+
+  @override
+  Stream<UserInfoEntity?> getUserInfoStream() {
+    return _userInfoDataSource.getUserInfoStream().map((userInfoDto) {
+      if (userInfoDto == null) {
+        return null;
+      }
+
+      Profile profileEntity;
+      final p = userInfoDto.profile;
+
+      if (userInfoDto.role == 'student') {
+        profileEntity = StudentProfileEntity(
+          school: p['school'] ?? '',
+          grade: p['grade'] ?? '',
+          guardian: p['guardian'] ?? '',
+          guardianPhoneNumber: p['guardianPhoneNumber'] ?? '',
+        );
+      } else{
+        profileEntity = TeacherProfileEntity(
+          grade: p['grade'] ?? '',
+          careerYears: p['careerYears'] ?? 0,
+        );
+      }
+
+      return UserInfoEntity(
+        role: userInfoDto.role,
+        name: userInfoDto.name,
+        christianName: userInfoDto.christianName,
+        phoneNumber: userInfoDto.phoneNumber,
+        department: userInfoDto.department,
+        profile: profileEntity,
+      );
+    });
+  }
+
+  @override
+  Future<UserInfoEntity> getUserInfo() async {
+    final userInfoDto =  await _userInfoDataSource.getUserInfo();
+
+    Profile profileEntity;
+    final p = userInfoDto.profile;
+
+    if (userInfoDto.role == 'student') {
+      profileEntity = StudentProfileEntity(
+        school: p['school'] ?? '',
+        grade: p['grade'] ?? '',
+        guardian: p['guardian'] ?? '',
+        guardianPhoneNumber: p['guardianPhoneNumber'] ?? '',
+      );
+    } else{
+      profileEntity = TeacherProfileEntity(
+        grade: p['grade'] ?? '',
+        careerYears: p['careerYears'] ?? 0,
+      );
+    }
+
+    return UserInfoEntity(
+      role: userInfoDto.role,
+      name: userInfoDto.name,
+      christianName: userInfoDto.christianName,
+      phoneNumber: userInfoDto.phoneNumber,
+      department: userInfoDto.department,
+      profile: profileEntity,
+    );
+  }
 }

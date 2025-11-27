@@ -20,7 +20,7 @@ class UserInfoDataSourceImpl implements UserInfoDataSource {
           .collection('user_info')
           .doc(_auth.currentUser?.uid)
           .get();
-          log.e(userInfoDto.toJson());
+      log.e(userInfoDto.toJson());
       if (!doc.exists) {
         await _firestore
             .collection('user_info')
@@ -30,6 +30,33 @@ class UserInfoDataSourceImpl implements UserInfoDataSource {
       }
     } catch (e, stackTrace) {
       log.i('e: $e, stack: $stackTrace');
+    }
+  }
+
+  @override
+  Stream<UserInfoDto?> getUserInfoStream() {
+    final uid = _auth.currentUser?.uid;
+    log.i('getUserInfoStream called, uid: $uid');
+    final docRef = _firestore.collection('user_info').doc(uid);
+    return docRef.snapshots().map((doc) {
+      if (!doc.exists) return null;
+      final map = doc.data() as Map<String, dynamic>;
+      return UserInfoDto.fromJson(map);
+    });
+  }
+
+  @override
+  Future<UserInfoDto> getUserInfo() async {
+    try {
+      final doc = await _firestore
+          .collection('user_info')
+          .doc(_auth.currentUser?.uid)
+          .get();
+      final docs = doc.data() as Map<String, dynamic>;
+      return UserInfoDto.fromJson(docs);
+    } catch (e, stackTrace) {
+      log.i('e: $e, stack: $stackTrace');
+      return Future.error(e);
     }
   }
 }
