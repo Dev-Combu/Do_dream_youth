@@ -22,22 +22,36 @@ class _AttendancePageState extends ConsumerState<AttendancePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
-              fit: FlexFit.tight,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(8),
+              fit: FlexFit.loose,
+              child: GestureDetector(
+                onTap: () {
+                  userRole == "student"
+                  ? context.push('/at_history')
+                  : context.push('/at_history');
+                  
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  height: 150,
+                  child: Center(
+                    child: Text(
+                      "출석 확인",
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ),
                 ),
-                height: 150,
               ),
             ),
             Padding(padding:  const EdgeInsets.all(8.0)),
             Flexible(
-              fit: FlexFit.tight,
+              fit: FlexFit.loose,
               child: GestureDetector(
                 onTap: () {
                   userRole == "student"
@@ -50,6 +64,12 @@ class _AttendancePageState extends ConsumerState<AttendancePage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   height: 150,
+                  child: Center(
+                    child: Text(
+                      userRole == "student" ? "QR 코드 스캔하기" : "출석 QR 코드 생성하기",
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ),
                 ),
               ),
             ),
