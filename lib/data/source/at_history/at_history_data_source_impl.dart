@@ -13,6 +13,8 @@ class AtHistoryDataSourceImpl implements AtHistoryDataSource {
       final docRef = await _firestore
           .collection('attendance_students_all')
           .get();
+      log.e(docRef.docs);
+      print("확인중 : ${docRef.docs}");
       final atHistoryList = docRef.docs.expand((doc) {
         final data = doc.data();
         final name = data['name'];
@@ -31,6 +33,7 @@ class AtHistoryDataSourceImpl implements AtHistoryDataSource {
       log.e(atHistoryList);
       return atHistoryList;
     } catch (e) {
+      log.i(  'e: $e');
       return Future.error(e);
     }
   }

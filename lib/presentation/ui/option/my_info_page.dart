@@ -33,12 +33,46 @@ class _MyInfoPageState extends ConsumerState<MyInfoPage> {
         title: Text('My Info'),
         backgroundColor: Theme.of(context).colorScheme.surface,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text(userinfo?.christianName ?? 'No user info'),
-            Text(user!.uid),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          width: double.infinity,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text("이름 : "),
+                  Text(userinfo?.name ?? 'No user info'),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("셰레명 : "),
+                  Text(userinfo?.christianName ?? 'No user info'),
+                ],
+              ),Row(
+                children: [
+                  Text("uid : "),
+                  Text(user!.uid ?? 'No user info'),
+                ],
+              ),Row(
+                children: [
+                  Text("이름 : "),
+                  Text(userinfo?.christianName ?? 'No user info'),
+                ],
+              ),Row(
+                children: [
+                  Text("이름 : "),
+                  Text(userinfo?.christianName ?? 'No user info'),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

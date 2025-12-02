@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AtHistoryViewModel extends Notifier<List<AtHistoryEntity>>{
   @override
-  build() {
+  List<AtHistoryEntity> build() {
     return [];
   }
   Future<void> loadAtHistory() async{
