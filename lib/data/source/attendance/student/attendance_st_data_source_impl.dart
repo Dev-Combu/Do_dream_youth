@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 class AttendanceStDataSourceImpl implements AttendanceStDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _date = DateFormat('yyyy.MM.dd').format(DateTime.now());
-  final _uuid = FirebaseAuth.instance.currentUser!.uid;
+  final _uuid = FirebaseAuth.instance.currentUser?.uid;
   Logger log = Logger();
 
   @override
@@ -21,22 +21,19 @@ class AttendanceStDataSourceImpl implements AttendanceStDataSource {
 
       // 2. 해당 학생 문서 내의 서브 컬렉션 경로 지정
       final historyDocRef = studentDocRef
-          .collection('attendance_history') // <-- 서브 컬렉션 이름 (직관적으로 변경 가능)
-          .doc(_date); // <-- 날짜(_date)를 출석 기록 문서 ID로 사용
+          .collection('attendance_history')
+          .doc(_date);
 
       // 3. 서브 컬렉션에 기록할 데이터
       final attendanceRecord = {
-        'name': attendanceStDto.toJson()['name'], // 학생 이름 (쿼리 편의를 위해 중복 저장)
+        'name': attendanceStDto.toJson()['name'],
         'status': 'attended',
-        'timestamp': FieldValue.serverTimestamp(), // 서버 시간
-        // 추가 정보가 필요하면 여기에 필드 추가 가능
+        'timestamp': FieldValue.serverTimestamp(),
       };
 
       // 4. 서브 컬렉션의 문서에 데이터 저장 (덮어쓰기)
       await historyDocRef.set(attendanceRecord, SetOptions(merge: true));
 
-      // *옵션: 학생 문서에 마지막 출석일 업데이트*
-      // 학생 문서 자체에 최종 업데이트 시간을 저장하여 최신 기록을 빠르게 알 수 있음
       await studentDocRef.set({
         'last_attendance_date': _date,
         'name': attendanceStDto.toJson()['name'],

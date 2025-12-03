@@ -5,6 +5,10 @@ class AtHistoryUsecase {
   AtHistoryUsecase(this._atHistoryRepository);
   final AtHistoryRepository _atHistoryRepository;
 
+  Future<List<AtHistoryEntity>> readAtHistorySt() {
+    return _atHistoryRepository.readAtHistorySt();
+  }
+
   Future<List<AtHistoryEntity>> readAtHistory() {
     return _atHistoryRepository.readAtHistory();
   }

@@ -1,4 +1,5 @@
-import 'package:do_dream_youth/presentation/ui/attendance/at_history/at_history.dart';
+import 'package:do_dream_youth/presentation/ui/attendance/at_history/page_at_history_st.dart';
+import 'package:do_dream_youth/presentation/ui/attendance/at_history/page_at_history_teacher.dart';
 import 'package:do_dream_youth/presentation/ui/attendance/attendance_chek/attendance_check_page.dart';
 import 'package:do_dream_youth/presentation/ui/attendance/attendance_page.dart';
 import 'package:do_dream_youth/presentation/ui/attendance/attendance_qr/attendance_qr_page.dart';
@@ -144,8 +145,12 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/at_history',
-      builder: (context, state) => AtHistory(),
+      path: '/at_history_st',
+      builder: (context, state) => PageAtHistorySt(),
+    ),
+    GoRoute(
+      path: '/at_history_teacher',
+      builder: (context, state) => PageAtHistoryTeacher(),
     ),
     GoRoute(
       path: '/attendance_qr',

@@ -7,7 +7,17 @@ class AtHistoryRepositoryImpl implements AtHistoryRepository{
   final AtHistoryDataSource _atHistoryDataSource;
 
   @override
-  Future<List<AtHistoryEntity>> readAtHistory() async{
+  Future<List<AtHistoryEntity>> readAtHistorySt() async{
+    final result = await _atHistoryDataSource.readAtHistorySt();
+    return result.map((dto) => AtHistoryEntity(
+      name: dto.name,
+      userId: dto.userId,
+      timestamp: dto.timestamp,
+    )).toList();
+  }
+  
+  @override
+  Future<List<AtHistoryEntity>> readAtHistory() async {
     final result = await _atHistoryDataSource.readAtHistory();
     return result.map((dto) => AtHistoryEntity(
       name: dto.name,

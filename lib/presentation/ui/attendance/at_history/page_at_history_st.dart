@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:do_dream_youth/presentation/ui/attendance/at_history/at_history_view_model.dart';
@@ -7,14 +6,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 
-class AtHistory extends ConsumerStatefulWidget {
-  const AtHistory({super.key});
+class PageAtHistorySt extends ConsumerStatefulWidget {
+  const PageAtHistorySt({super.key});
 
   @override
-  ConsumerState<AtHistory> createState() => _AtHistoryState();
+  ConsumerState<PageAtHistorySt> createState() => _PageAtHistoryStState();
 }
 
-class _AtHistoryState extends ConsumerState<AtHistory> {
+class _PageAtHistoryStState extends ConsumerState<PageAtHistorySt> {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   Logger log = Logger();
@@ -33,12 +32,12 @@ class _AtHistoryState extends ConsumerState<AtHistory> {
     return sundays;
   }
 
+
   bool atOrNot(DateTime date) {
-    final attendances = ref.read(atHistoryViewModel);
+    final attendances = ref.read(atHistoryViewModel).atHistoryList;
     print(  'attendances: ${attendances.length}');
 
     for (var attendance in attendances) {
-      log.e(attendance.timestamp);
       if (attendance.timestamp.year == date.year &&
           attendance.timestamp.month == date.month &&
           attendance.timestamp.day == date.day) {
@@ -76,6 +75,10 @@ class _AtHistoryState extends ConsumerState<AtHistory> {
                     onPressed: () {
                       setState(() {
                         month = month - 1;
+                        if(month <1){
+                          month = 12;
+                          year = year -1;
+                        }
                       });
                     },
                     child: Icon(Icons.arrow_left),
@@ -91,6 +94,10 @@ class _AtHistoryState extends ConsumerState<AtHistory> {
                     onPressed: () {
                       setState(() {
                         month = month + 1;
+                        if(month >12){
+                          month = 1;
+                          year = year +1;
+                        }
                       });
                     },
                     child: Icon(Icons.arrow_right),

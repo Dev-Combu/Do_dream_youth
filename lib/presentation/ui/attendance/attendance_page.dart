@@ -30,8 +30,8 @@ class _AttendancePageState extends ConsumerState<AttendancePage> {
               child: GestureDetector(
                 onTap: () {
                   userRole == "student"
-                  ? context.push('/at_history')
-                  : context.push('/at_history');
+                  ? context.go('/at_history_st')
+                  : context.go('/at_history_teacher');
                   
                 },
                 child: Container(
