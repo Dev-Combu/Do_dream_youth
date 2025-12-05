@@ -8,4 +8,8 @@ class ScheduleUsecase {
   Stream<List<ScheduleEntity>?> readSchedule() {
     return _scheduleRepository.readSchedule();
   }
+
+  Future<void> createSchedule(ScheduleEntity scheduleInfo) async {
+    return await _scheduleRepository.createSchedule(scheduleInfo);
+  }
 }

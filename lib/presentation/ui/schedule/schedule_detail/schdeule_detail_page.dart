@@ -23,42 +23,60 @@ class _SchdeuleDetailPageState extends State<SchdeuleDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('일정 상세'),
-      ),
+      backgroundColor: Colors.blue,
+      appBar: AppBar(backgroundColor: Colors.blue, title: const Text('일정 상세')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.name,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3), // changes position of shadow
               ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.name ?? '일정 이름 없음',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                Row(
+                  children: [
+                    Text(
+                      '기간: ${widget.startDate} ~ ${widget.endDate}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 8),
+                    Spacer(),
+                    Text(
+                      '대상: ${widget.target}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                Divider(height: 32, color: Colors.grey),
+                Text(
+                  '설명: ${widget.description}',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            Text(
-              '설명: ${widget.description}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '시작 날짜: ${widget.startDate}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '종료 날짜: ${widget.endDate}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '대상: ${widget.target}',
-              style: const TextStyle(fontSize: 16),
-            ),
-          ],
+          ),
         ),
       ),
     );
