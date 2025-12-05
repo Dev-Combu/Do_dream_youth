@@ -65,7 +65,7 @@ class _AttendanceCheckPageState extends ConsumerState<AttendanceCheckPage> {
 
   @override
   Widget build(BuildContext context) {
-    final token = ref.watch(attendancePrViewModel)!.token;
+    final token = ref.watch(attendancePrViewModel)?.token;
     final userName = ref.watch(userInfoViewModelProvider).value?.name;
     return Scaffold(
       appBar: AppBar(
