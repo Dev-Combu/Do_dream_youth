@@ -1,4 +1,5 @@
 import 'package:do_dream_youth/domain/entity/schedule_entity.dart';
+import 'package:do_dream_youth/presentation/ui/schedule/schedule_create_update/schedule_create_update_page.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_detail/schdeule_detail_page.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_view_model.dart';
 import 'package:flutter/material.dart';
@@ -168,6 +169,12 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleCreateUpdatePage(editing: false,)));
+        },
+        child: Icon(Icons.edit_outlined),
       ),
     );
   }

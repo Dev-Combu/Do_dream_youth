@@ -19,6 +19,7 @@ class ScheduleViewModel  extends Notifier<List<ScheduleEntity>?>{
       streamSubscription.cancel();
     });
   }
+
 }
 
 final scheduleViewModel = NotifierProvider<ScheduleViewModel, List<ScheduleEntity>?>(

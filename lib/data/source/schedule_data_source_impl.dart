@@ -6,10 +6,10 @@ import 'package:logger/logger.dart';
 class ScheduleDataSourceImpl implements ScheduleDataSource{
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final Logger logger = Logger();
+  final Logger log = Logger();
 
   @override
-  Stream<List<ScheduleDto>> readBook() {
+  Stream<List<ScheduleDto>> readSchedule() {
     final collectionRef = _firestore.collection('schedule');
     final result = collectionRef.snapshots();
 
@@ -25,5 +25,17 @@ class ScheduleDataSourceImpl implements ScheduleDataSource{
       return docs;
     });
     return stream;
+  }
+  
+  @override
+  Future<void> createSchedule(ScheduleDto scheduleInfo) async{
+    try{
+      await _firestore
+      .collection('schedule')
+      .doc()
+      .set(scheduleInfo.toJson());
+    }catch(e){
+      log.i('e: $e');
+    }
   }
 }
