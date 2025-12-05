@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:do_dream_youth/presentation/ui/attendance/at_history/at_history_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 class PageAtHistoryTeacher extends ConsumerStatefulWidget {
   const PageAtHistoryTeacher({super.key});
@@ -14,6 +17,15 @@ class PageAtHistoryTeacher extends ConsumerStatefulWidget {
 class _PageAtHistoryTeacherState extends ConsumerState<PageAtHistoryTeacher> {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
+  String searchName = '';
+  String? grades;
+  List<String> items = ['선택', '중학교 1학년', '중 2', '중 3', '고 1', '고 2', '고 3'];
+  Logger log = Logger();
+  @override
+  void initState() {
+    super.initState();
+    grades = items.first;
+  }
 
   List<DateTime> getSundaysInMonth(int year, int month) {
     List<DateTime> sundays = [];
@@ -29,78 +41,66 @@ class _PageAtHistoryTeacherState extends ConsumerState<PageAtHistoryTeacher> {
     return sundays;
   }
 
-  bool atOrNot(DateTime date) {
-    final attendances = ref.read(atHistoryViewModel).atHistoryList;
-    print('attendances: ${attendances.length}');
-
-    for (var attendance in attendances) {
-      if (attendance.timestamp.year == date.year &&
-          attendance.timestamp.month == date.month &&
-          attendance.timestamp.day == date.day) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   @override
   Widget build(BuildContext context) {
     final List<DateTime> sundays = getSundaysInMonth(year, month);
     final atAll = ref.watch(atHistoryViewModel).atHistoryList;
+    final filteredAttendances = atAll.where((attendance) {
+      final lowerName = attendance.name.toLowerCase();
+      final lowerGrade = attendance.grade.toLowerCase();
 
-    // 1. 학생별 출석 날짜를 그룹화하는 Map 생성
-  Map<String, List<DateTime>> studentAttendanceMap = {};
-  for (var attendance in atAll) {
-    if (!studentAttendanceMap.containsKey(attendance.name)) {
-      studentAttendanceMap[attendance.name] = [];
-    }
-    // 해당 월의 출석만 표시되므로, 날짜가 중복되지 않도록 확인 후 추가
-    DateTime attendanceDate = DateTime(
+      bool matchesName =
+          searchName.isEmpty || lowerName.contains(searchName.toLowerCase());
+
+      bool matchesGrade =
+          (grades == '선택') || lowerGrade.contains(grades!.toLowerCase());
+
+      return matchesName && matchesGrade; // AND 조건으로 반드시 둘 다 만족
+    }).toList();
+    Map<String, List<DateTime>> studentAttendanceMap = {};
+    for (var attendance in filteredAttendances) {
+      if (!studentAttendanceMap.containsKey(attendance.name)) {
+        studentAttendanceMap[attendance.name] = [];
+      }
+      DateTime attendanceDate = DateTime(
         attendance.timestamp.year,
         attendance.timestamp.month,
-        attendance.timestamp.day);
+        attendance.timestamp.day,
+      );
 
-    if (attendanceDate.month == month &&
-        attendanceDate.year == year &&
-        !studentAttendanceMap[attendance.name]!.contains(attendanceDate)) {
-      studentAttendanceMap[attendance.name]!.add(attendanceDate);
+      if (attendanceDate.month == month &&
+          attendanceDate.year == year &&
+          !studentAttendanceMap[attendance.name]!.contains(attendanceDate)) {
+        studentAttendanceMap[attendance.name]!.add(attendanceDate);
+      }
     }
-  }
 
-  // 2. Map을 사용하여 DataRow 리스트 생성
-  List<DataRow> attendanceRows = studentAttendanceMap.entries.map((entry) {
-    String studentName = entry.key;
-    List<DateTime> attendedDates = entry.value;
-
-    return DataRow(
-      cells: [
-        // 첫 번째 Cell: 학생 이름
-        DataCell(Text(studentName)),
-
-        // 나머지 Cell: 일요일별 출석 여부
-        ...sundays.map(
-          (sundayDate) {
-            // 해당 일요일에 이 학생의 출석 기록이 있는지 확인
+    List<DataRow> attendanceRows = studentAttendanceMap.entries.map((entry) {
+      String studentName = entry.key;
+      List<DateTime> attendedDates = entry.value;
+      
+      return DataRow(
+        cells: [
+          DataCell(Text(studentName)),
+          ...sundays.map((sundayDate) {
             bool hasAttended = attendedDates.any(
               (attendedDate) =>
                   attendedDate.year == sundayDate.year &&
                   attendedDate.month == sundayDate.month &&
                   attendedDate.day == sundayDate.day,
             );
-
             return DataCell(
-              Center( // 중앙 정렬을 위해 Center 추가 (선택 사항)
+              Center(
                 child: Icon(
                   hasAttended ? Icons.check_circle : Icons.cancel,
                   color: hasAttended ? Colors.green : Colors.red,
                 ),
               ),
             );
-          },
-        ),
-      ],
-    );
-  }).toList();
+          }),
+        ],
+      );
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -116,11 +116,51 @@ class _PageAtHistoryTeacherState extends ConsumerState<PageAtHistoryTeacher> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: '학생 이름으로 검색',
-                border: OutlineInputBorder(),
-              ),
+            Row(
+              children: [
+                Flexible(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: '이름으로 검색',
+                      border: OutlineInputBorder(),
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        searchName = value;
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DropdownButton(
+                        value: grades,
+                        items: items.map<DropdownMenuItem<String>>((
+                          String value,
+                        ) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            grades = newValue;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 16.0),
             Container(
@@ -176,7 +216,7 @@ class _PageAtHistoryTeacherState extends ConsumerState<PageAtHistoryTeacher> {
                         DataColumn(label: Text('${date.month}/${date.day}')),
                   ),
                 ],
-                rows:attendanceRows
+                rows: attendanceRows,
               ),
             ),
           ],

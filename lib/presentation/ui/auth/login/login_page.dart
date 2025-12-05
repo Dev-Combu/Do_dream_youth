@@ -23,7 +23,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 
   Future<void> loadUserInfo() async {
-  ref.watch(userInfoViewModelProvider).value;
+    ref.watch(userInfoViewModelProvider).value;
   }
 
   @override
@@ -59,7 +59,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: GestureDetector(
                       onTap: () {
                         //회원가입 페이지로 이동
-                        
+
                         context.go("/signuprole");
                         print("회원가입 페이지로 이동");
                       },
@@ -75,8 +75,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    emailSignUp(emailController.text, pwdController.text)
-                    .then((_) => loadUserInfo());
+                    emailSignUp(
+                      emailController.text,
+                      pwdController.text,
+                    ).then((_) => loadUserInfo());
                   },
                   child: Container(
                     decoration: BoxDecoration(

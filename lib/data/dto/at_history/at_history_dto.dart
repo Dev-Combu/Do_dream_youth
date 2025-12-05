@@ -10,6 +10,7 @@ abstract class AtHistoryDto with _$AtHistoryDto{
     required String userId,
     required String name,
     required DateTime timestamp,
+    required String grade
     
   }) = _AtHistoryDto;
 

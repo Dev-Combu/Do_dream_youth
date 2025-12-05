@@ -13,6 +13,7 @@ class AtHistoryRepositoryImpl implements AtHistoryRepository{
       name: dto.name,
       userId: dto.userId,
       timestamp: dto.timestamp,
+      grade: dto.grade
     )).toList();
   }
   
@@ -23,6 +24,7 @@ class AtHistoryRepositoryImpl implements AtHistoryRepository{
       name: dto.name,
       userId: dto.userId,
       timestamp: dto.timestamp,
+      grade: dto.grade
     )).toList();
   }
 }

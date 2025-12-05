@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AtHistoryDto {
 
- String get userId; String get name; DateTime get timestamp;
+ String get userId; String get name; DateTime get timestamp; String get grade;
 /// Create a copy of AtHistoryDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AtHistoryDtoCopyWith<AtHistoryDto> get copyWith => _$AtHistoryDtoCopyWithImpl<A
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AtHistoryDto&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AtHistoryDto&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.grade, grade) || other.grade == grade));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,name,timestamp);
+int get hashCode => Object.hash(runtimeType,userId,name,timestamp,grade);
 
 @override
 String toString() {
-  return 'AtHistoryDto(userId: $userId, name: $name, timestamp: $timestamp)';
+  return 'AtHistoryDto(userId: $userId, name: $name, timestamp: $timestamp, grade: $grade)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AtHistoryDtoCopyWith<$Res>  {
   factory $AtHistoryDtoCopyWith(AtHistoryDto value, $Res Function(AtHistoryDto) _then) = _$AtHistoryDtoCopyWithImpl;
 @useResult
 $Res call({
- String userId, String name, DateTime timestamp
+ String userId, String name, DateTime timestamp, String grade
 });
 
 
@@ -65,12 +65,13 @@ class _$AtHistoryDtoCopyWithImpl<$Res>
 
 /// Create a copy of AtHistoryDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? name = null,Object? timestamp = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? name = null,Object? timestamp = null,Object? grade = null,}) {
   return _then(_self.copyWith(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as DateTime,grade: null == grade ? _self.grade : grade // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  String name,  DateTime timestamp)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  String name,  DateTime timestamp,  String grade)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AtHistoryDto() when $default != null:
-return $default(_that.userId,_that.name,_that.timestamp);case _:
+return $default(_that.userId,_that.name,_that.timestamp,_that.grade);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.userId,_that.name,_that.timestamp);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  String name,  DateTime timestamp)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  String name,  DateTime timestamp,  String grade)  $default,) {final _that = this;
 switch (_that) {
 case _AtHistoryDto():
-return $default(_that.userId,_that.name,_that.timestamp);case _:
+return $default(_that.userId,_that.name,_that.timestamp,_that.grade);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.userId,_that.name,_that.timestamp);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  String name,  DateTime timestamp)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  String name,  DateTime timestamp,  String grade)?  $default,) {final _that = this;
 switch (_that) {
 case _AtHistoryDto() when $default != null:
-return $default(_that.userId,_that.name,_that.timestamp);case _:
+return $default(_that.userId,_that.name,_that.timestamp,_that.grade);case _:
   return null;
 
 }
@@ -211,12 +212,13 @@ return $default(_that.userId,_that.name,_that.timestamp);case _:
 @JsonSerializable()
 
 class _AtHistoryDto implements AtHistoryDto {
-   _AtHistoryDto({required this.userId, required this.name, required this.timestamp});
+   _AtHistoryDto({required this.userId, required this.name, required this.timestamp, required this.grade});
   factory _AtHistoryDto.fromJson(Map<String, dynamic> json) => _$AtHistoryDtoFromJson(json);
 
 @override final  String userId;
 @override final  String name;
 @override final  DateTime timestamp;
+@override final  String grade;
 
 /// Create a copy of AtHistoryDto
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AtHistoryDto&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AtHistoryDto&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.grade, grade) || other.grade == grade));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,name,timestamp);
+int get hashCode => Object.hash(runtimeType,userId,name,timestamp,grade);
 
 @override
 String toString() {
-  return 'AtHistoryDto(userId: $userId, name: $name, timestamp: $timestamp)';
+  return 'AtHistoryDto(userId: $userId, name: $name, timestamp: $timestamp, grade: $grade)';
 }
 
 
@@ -251,7 +253,7 @@ abstract mixin class _$AtHistoryDtoCopyWith<$Res> implements $AtHistoryDtoCopyWi
   factory _$AtHistoryDtoCopyWith(_AtHistoryDto value, $Res Function(_AtHistoryDto) _then) = __$AtHistoryDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String userId, String name, DateTime timestamp
+ String userId, String name, DateTime timestamp, String grade
 });
 
 
@@ -268,12 +270,13 @@ class __$AtHistoryDtoCopyWithImpl<$Res>
 
 /// Create a copy of AtHistoryDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? name = null,Object? timestamp = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? name = null,Object? timestamp = null,Object? grade = null,}) {
   return _then(_AtHistoryDto(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as DateTime,grade: null == grade ? _self.grade : grade // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

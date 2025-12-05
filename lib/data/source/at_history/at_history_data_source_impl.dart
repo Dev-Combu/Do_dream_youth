@@ -22,6 +22,7 @@ class AtHistoryDataSourceImpl implements AtHistoryDataSource {
           name: doc['name'],
           timestamp: doc['timestamp'].toDate(),
           userId: _uuid,
+          grade: doc['grade']
         ),
       );
       return atHistoryList.toList();
@@ -47,6 +48,7 @@ class AtHistoryDataSourceImpl implements AtHistoryDataSource {
               name: historyDoc['name'],
               timestamp: historyDoc['timestamp'].toDate(),
               userId: doc.id,
+              grade: historyDoc['grade']
             ),
           );
         }
