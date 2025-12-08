@@ -35,44 +35,47 @@ class _MyInfoPageState extends ConsumerState<MyInfoPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Container(
-          width: double.infinity,
-          height: 200,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text("이름 : "),
-                  Text(userinfo?.name ?? 'No user info'),
-                ],
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white
               ),
-              Row(
-                children: [
-                  Text("셰레명 : "),
-                  Text(userinfo?.christianName ?? 'No user info'),
-                ],
-              ),Row(
-                children: [
-                  Text("uid : "),
-                  Text(user!.uid ?? 'No user info'),
-                ],
-              ),Row(
-                children: [
-                  Text("이름 : "),
-                  Text(userinfo?.christianName ?? 'No user info'),
-                ],
-              ),Row(
-                children: [
-                  Text("이름 : "),
-                  Text(userinfo?.christianName ?? 'No user info'),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text('로그인 정보'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("이메일", style: TextStyle(fontSize: 20),),
+                        Text('email@email.com',  style: TextStyle(fontSize: 20),),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Container(
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white
+              ),
+            )
+          ],
         ),
       ),
     );
