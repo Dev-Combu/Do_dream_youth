@@ -18,7 +18,6 @@ class _AttendancePageState extends ConsumerState<AttendancePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Attendance'),
-        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

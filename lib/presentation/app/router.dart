@@ -93,11 +93,8 @@ final router = GoRouter(
               child: const SchedulePage(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(-1, 0), // 오른쪽에서 들어오기
-                        end: Offset.zero,
-                      ).animate(animation),
+                    return FadeTransition(
+                      opacity: animation, // 0.0에서 1.0으로 서서히 나타남
                       child: child,
                     );
                   },
@@ -112,11 +109,8 @@ final router = GoRouter(
               child: const AttendancePage(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(1, 0), // 왼쪽에서
-                        end: Offset.zero,
-                      ).animate(animation),
+                    return FadeTransition(
+                      opacity: animation, // 0.0에서 1.0으로 서서히 나타남
                       child: child,
                     );
                   },
@@ -131,11 +125,8 @@ final router = GoRouter(
               child: const OptionPage(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(1, 0), // 왼쪽에서
-                        end: Offset.zero,
-                      ).animate(animation),
+                    return FadeTransition(
+                      opacity: animation, // 0.0에서 1.0으로 서서히 나타남
                       child: child,
                     );
                   },

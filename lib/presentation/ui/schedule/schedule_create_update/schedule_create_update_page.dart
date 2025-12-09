@@ -111,8 +111,7 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
-      appBar: AppBar(backgroundColor: Colors.blue, title: const Text('일정 상세')),
+      appBar: AppBar(title: const Text('일정 상세')),
       body: Column(
         children: [
           Expanded(

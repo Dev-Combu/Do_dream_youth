@@ -23,6 +23,15 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
   @override
   void initState() {
     super.initState();
+
+    Future.microtask(() {
+      final initialSchedules = ref.read(scheduleViewModel);
+      if (initialSchedules != null && initialSchedules.isNotEmpty) {
+        setState(() {
+          _buildEventsMap(initialSchedules);
+        });
+      }
+    });
   }
 
   DateTime _dateOnly(DateTime dt) => DateTime(dt.year, dt.month, dt.day);
