@@ -14,7 +14,7 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: Colors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.indigo, // 바텀 내비게이션 바의 배경색
+      backgroundColor: Colors.blue, // 바텀 내비게이션 바의 배경색
       selectedItemColor: Colors.white, // 선택된 아이템의 색상
       unselectedItemColor: Colors.white70, // 선택되지 않은 아이템의 색상
       selectedIconTheme: const IconThemeData(size: 30), // 선택된 아이콘 크기
@@ -34,6 +34,17 @@ class AppTheme {
       bodyLarge: TextStyle(fontFamily: 'Pretendard', fontSize: 16.0),
       bodyMedium: TextStyle(fontFamily: 'Pretendard', fontSize: 14.0),
       bodySmall: TextStyle(fontFamily: 'Pretendard', fontSize: 12.0),
+    ),
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      iconTheme: IconThemeData(color: Colors.black),
+      titleTextStyle: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Pretendard',
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+      ),
+      backgroundColor: Colors.blue,
     ),
   );
 }

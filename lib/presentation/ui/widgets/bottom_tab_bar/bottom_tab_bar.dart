@@ -34,7 +34,7 @@ class _BottomTabBarState extends ConsumerState<BottomTabBar> {
     required bool isSelected,
   }) {
     return BottomNavigationBarItem(
-      icon: Icon(icon, color: isSelected ? Colors.black : Colors.grey),
+      icon: Icon(icon, color: isSelected ? Colors.black : Colors.white),
       label: label,
     );
   }
