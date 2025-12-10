@@ -1,19 +1,33 @@
 import 'package:do_dream_youth/firebase_options.dart';
 import 'package:do_dream_youth/presentation/app/router.dart';
 import 'package:do_dream_youth/presentation/theme/theme.dart';
+import 'package:do_dream_youth/presentation/ui/widgets/notification_service.dart';
 import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+
+Future<void> handlerFirebaseBackgroundMessage(RemoteMessage message) async {
+  print('Handling a background message: ${message.messageId}');
+}
+
 
 void main() async {
   //firebase 초기화
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  final notificationService = NotificationService();
+  await notificationService.initFCM();
+  FirebaseMessaging.onBackgroundMessage(handlerFirebaseBackgroundMessage);
+
   runApp(ProviderScope(child: MyApp()));
 }
+
+
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
