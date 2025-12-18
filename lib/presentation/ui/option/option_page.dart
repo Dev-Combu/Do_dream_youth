@@ -1,7 +1,7 @@
-import 'package:do_dream_youth/presentation/ui/option/alarm_page.dart';
-import 'package:do_dream_youth/presentation/ui/option/app_version_page.dart';
-import 'package:do_dream_youth/presentation/ui/option/notice_page.dart';
-import 'package:do_dream_youth/presentation/ui/option/theme_setting_page.dart';
+import 'package:do_dream_youth/presentation/ui/option/pages/alarm_page.dart';
+import 'package:do_dream_youth/presentation/ui/option/pages/app_version_page.dart';
+import 'package:do_dream_youth/presentation/ui/option/pages/notice_page.dart';
+import 'package:do_dream_youth/presentation/ui/option/pages/theme_setting_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

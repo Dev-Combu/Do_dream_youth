@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 class MyInfoPage extends ConsumerStatefulWidget {
   const MyInfoPage({super.key});
@@ -14,6 +15,7 @@ class MyInfoPage extends ConsumerStatefulWidget {
 
 class _MyInfoPageState extends ConsumerState<MyInfoPage> {
   final user = FirebaseAuth.instance.currentUser;
+  Logger log = Logger();
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class _MyInfoPageState extends ConsumerState<MyInfoPage> {
   @override
   Widget build(BuildContext context) {
     final userinfo = ref.watch(userInfoViewModelProvider).value;
+    log.e("UUID : ${user?.uid}");
 
     if (userinfo?.profile is TeacherProfileEntity) {
       TeacherProfileEntity teacherProfile =

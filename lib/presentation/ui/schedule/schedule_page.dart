@@ -1,9 +1,11 @@
 import 'package:do_dream_youth/domain/entity/schedule_entity.dart';
+import 'package:do_dream_youth/presentation/ui/local_notifications/local_notification_page.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_create_update/schedule_create_update_page.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_detail/schdeule_detail_page.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -179,11 +181,55 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleCreateUpdatePage(editing: false,)));
-        },
-        child: Icon(Icons.edit_outlined),
+      floatingActionButton: SpeedDial(
+        icon: Icons.add, // 메인 FAB의 기본 아이콘
+        activeIcon: Icons.close, // 메인 FAB를 눌러 메뉴가 펼쳐졌을 때 아이콘
+        buttonSize: const Size(56.0, 56.0), // 메인 FAB의 크기
+        childrenButtonSize: const Size(65.0, 65.0),
+        visible: true, // SpeedDial이 항상 보일지 여부
+        curve: Curves.bounceIn, // 메뉴 펼쳐지는 애니메이션 커브
+        overlayColor: Colors.black, // 메뉴가 펼쳐졌을 때 배경에 깔리는 오버레이 색상
+        overlayOpacity: 0.5, // 오버레이 투명도
+        backgroundColor: Colors.blue, // 메인 FAB의 배경색
+        foregroundColor: Colors.white, // 메인 FAB의 아이콘 색상
+        elevation: 8.0,
+        shape: const CircleBorder(),
+        children: [
+          SpeedDialChild(
+            child: const Icon(Icons.edit),
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            label: '일정 생성하기',
+            labelStyle: const TextStyle(fontSize: 18.0),
+            shape: const CircleBorder(),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ScheduleCreateUpdatePage(editing: false),
+                ),
+              );
+            },
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.alarm_add_rounded),
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+            label: '알림 보내기',
+            labelStyle: const TextStyle(fontSize: 18.0),
+            shape: const CircleBorder(),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      LocalNotificationPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

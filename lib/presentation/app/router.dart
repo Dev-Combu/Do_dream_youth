@@ -7,7 +7,7 @@ import 'package:do_dream_youth/presentation/ui/auth/login/login_page.dart';
 import 'package:do_dream_youth/presentation/ui/auth/sign_up_info/sign_up_info.dart';
 import 'package:do_dream_youth/presentation/ui/auth/sign_up/sign_up_page.dart';
 import 'package:do_dream_youth/presentation/ui/auth/sign_up/sign_up_role.dart';
-import 'package:do_dream_youth/presentation/ui/option/my_info_page.dart';
+import 'package:do_dream_youth/presentation/ui/option/pages/my_info_page.dart';
 import 'package:do_dream_youth/presentation/ui/option/option_page.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_page.dart';
 import 'package:do_dream_youth/presentation/ui/widgets/bottom_tab_bar/bottom_tab_bar.dart';
