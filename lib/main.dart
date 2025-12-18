@@ -3,11 +3,13 @@ import 'package:do_dream_youth/presentation/app/router.dart';
 import 'package:do_dream_youth/presentation/theme/theme.dart';
 import 'package:do_dream_youth/presentation/ui/widgets/notification_service.dart';
 import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_model.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:logger/logger.dart';
 
 
 Future<void> handlerFirebaseBackgroundMessage(RemoteMessage message) async {
@@ -16,10 +18,13 @@ Future<void> handlerFirebaseBackgroundMessage(RemoteMessage message) async {
 
 
 void main() async {
+  Logger log = Logger();
   //firebase 초기화
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  await FirebaseAppCheck.instance.activate(
+    androidProvider : AndroidProvider.debug,
+  );
   final notificationService = NotificationService();
   await notificationService.initFCM();
   FirebaseMessaging.onBackgroundMessage(handlerFirebaseBackgroundMessage);
