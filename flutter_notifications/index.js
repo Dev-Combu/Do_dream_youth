@@ -2,19 +2,11 @@ const {onCall, HttpsError} = require("firebase-functions/v2/https");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const {onSchedule} = require("firebase-functions/v2/scheduler");
-const dayjs = require("dayjs");
-const utc = require("dayjs/plugin/utc"); // utc 변수 정의
-const timezone = require("dayjs/plugin/timezone"); // timezone 변수 정의
-
-// 정의한 변수를 extend에 넣어줍니다.
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 admin.initializeApp();
 
 // ⭐️ Firestore 인스턴스 초기화
 const db = admin.firestore();
-
 
 exports.setUserRoleClaim = functions.https.onCall(async (data, context) => {
   // ⭐️ 관리자 권한 확인 (선택 사항이나 보안상 강력 권장)
@@ -126,7 +118,6 @@ exports.sendScheduleNotification = onCall(async (request) => {
   const body = data.body;
   const topicList = data.topics;
   const sendTime = data.sendTime;
-  const finalSendTime = dayjs.tz(sendTime, "Asia/Seoul").toDate();
   const additionalPayload = data.payload || {};
 
   if (!topicList || !Array.isArray(topicList) || topicList.length === 0) {
@@ -162,7 +153,7 @@ exports.sendScheduleNotification = onCall(async (request) => {
             .collection("scheduled_notifications")
             .add({
               message: message,
-              sendTime: new Date(finalSendTime), // Date 객체로 변환하여 저장
+              sendTime: new Date(sendTime), // Date 객체로 변환하여 저장
               status: "pending",
               createdAt: admin.firestore.FieldValue.serverTimestamp(),
               createdBy: auth.uid,
