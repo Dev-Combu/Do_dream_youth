@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:do_dream_youth/domain/entity/schedule_entity.dart';
+import 'package:do_dream_youth/presentation/ui/schedule/schedule_create_update/schedule_cu_view_model.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ import 'package:logger/logger.dart';
 class ScheduleCreateUpdatePage extends ConsumerStatefulWidget {
   const ScheduleCreateUpdatePage({
     super.key,
+    this.id,
     this.name,
     this.description,
     this.startDate,
@@ -17,10 +19,11 @@ class ScheduleCreateUpdatePage extends ConsumerStatefulWidget {
     this.target,
     required this.editing,
   });
+  final String? id;
   final String? name;
   final String? description;
-  final String? startDate;
-  final String? endDate;
+  final DateTime? startDate;
+  final DateTime? endDate;
   final String? target;
   final bool editing;
 
@@ -33,8 +36,6 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController targetController = TextEditingController();
-  TextEditingController startDateController = TextEditingController();
-  TextEditingController endDateController = TextEditingController();
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -47,6 +48,18 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
   DateTime now = DateTime.now();
 
   Logger log = Logger();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.editing) {
+      nameController.text = widget.name ?? '';
+      descriptionController.text = widget.description ?? '';
+      targetController.text = widget.target ?? '';
+      startDate = widget.startDate;
+      endDate = widget.endDate;
+    }
+  }
 
   Future<void> _pickDateTime(bool isStart) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -108,10 +121,20 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
     }
   }
 
+  Future<void> updateSchedule(ScheduleEntity scheduleInfo, String scheduleId)async{
+    try{
+      await ref
+        .read(fetchscheduleUsecaseProvider)
+        .updateSchedule(scheduleInfo, scheduleId);
+    }catch(e){
+      log.e(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('일정 상세')),
+      appBar: AppBar(title: Text(widget.editing ? '일정 수정' : '일정 생성')),
       body: Column(
         children: [
           Expanded(
@@ -136,6 +159,7 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextField(
+                        controller: nameController,
                         style: const TextStyle(fontSize: 24),
                         decoration: InputDecoration(
                           labelText: '제목',
@@ -152,8 +176,8 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
                               // 선택된 날짜와 시간 표시
                               Text(
                                 (startDate != null)
-                                    ? '${startDate?.year}/${startDate?.month}/${startDate?.day} ${startDate?.hour}'
-                                    : '날짜와 시간을 선택해주세요',
+                                    ? '${startDate?.year}/${startDate?.month}/${startDate?.day} ${startDate?.hour}:${startDate?.minute}'
+                                    : '시작 날짜 및 시간',
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -182,8 +206,8 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
                               // 선택된 날짜와 시간 표시
                               Text(
                                 (endDate != null)
-                                    ? '${endDate?.year}/${endDate?.month}/${endDate?.day} ${endDate?.hour}'
-                                    : '날짜와 시간을 선택해주세요',
+                                    ? '${endDate?.year}/${endDate?.month}/${endDate?.day} ${endDate?.hour}:${endDate?.minute}'
+                                    : '끝 날짜 및 시간',
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -240,15 +264,27 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
             margin: const EdgeInsets.only(top: 8.0, bottom: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                createSchedule(
-                  ScheduleEntity(
-                    name: nameController.text,
-                    startDate: startDate!,
-                    endDate: endDate!,
-                    target: targetController.text,
-                    description: descriptionController.text,
-                  )
-                );
+                widget.editing
+                    ? updateSchedule(
+                        ScheduleEntity(
+                          name: nameController.text,
+                          startDate: startDate!,
+                          endDate: endDate!,
+                          target: targetController.text,
+                          description: descriptionController.text,
+                        ),
+                        widget.id!,
+                      )
+                    : createSchedule(
+                        ScheduleEntity(
+                          name: nameController.text,
+                          startDate: startDate!,
+                          endDate: endDate!,
+                          target: targetController.text,
+                          description: descriptionController.text,
+                        ),
+                      );
+                context.pop();
                 context.pop();
               },
               style: ElevatedButton.styleFrom(

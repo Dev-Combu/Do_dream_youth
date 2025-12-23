@@ -38,4 +38,26 @@ class ScheduleDataSourceImpl implements ScheduleDataSource{
       log.i('e: $e');
     }
   }
+
+  @override
+  Future<void> updateSchedule(ScheduleDto scheduleInfo, String scheduleId) async {
+    try {
+      await _firestore
+          .collection('schedule')
+          .doc(scheduleId)
+          .update(scheduleInfo.toJson());
+    } catch (e) {
+      log.i('e: $e');
+      log.i('scheduleInfo.id: ${scheduleInfo.id}');
+    }
+  }
+
+  @override
+  Future<void> deleteSchedule(String scheduleId) async {
+    try {
+      await _firestore.collection('schedule').doc(scheduleId).delete();
+    } catch (e) {
+      log.i('e: $e');
+    }
+  }
 }

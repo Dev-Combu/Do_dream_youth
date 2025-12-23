@@ -7,6 +7,7 @@ part of 'schedule_dto.dart';
 // **************************************************************************
 
 _ScheduleDto _$ScheduleDtoFromJson(Map<String, dynamic> json) => _ScheduleDto(
+  id: json['id'] as String?,
   name: json['name'] as String,
   startDate: _toDateTimeNonNull(json['startDate']),
   endDate: _toDateTimeNonNull(json['endDate']),

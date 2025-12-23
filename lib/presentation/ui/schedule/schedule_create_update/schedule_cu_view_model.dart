@@ -13,6 +13,9 @@ class ScheduleCuViewModel extends Notifier<ScheduleEntity?>{
     return await ref.read(fetchscheduleUsecaseProvider).createSchedule(scheduleInfo);
   }
 
+  Future<void> updateSchedule(ScheduleEntity scheduleInfo, String scheduleId) async{
+    return await ref.read(fetchscheduleUsecaseProvider).updateSchedule(scheduleInfo, scheduleId);
+  }
 }
 
 final scheduleViewModel = NotifierProvider<ScheduleCuViewModel, ScheduleEntity?>(
