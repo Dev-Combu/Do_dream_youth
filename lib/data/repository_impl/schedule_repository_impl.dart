@@ -37,4 +37,25 @@ class ScheduleRepositoryImpl implements ScheduleRepository{
       ),
     );
   }
+
+  @override
+  Future<void> updateSchedule(ScheduleEntity scheduleInfo, String scheduleId) async{
+    return await _scheduleDataSource.updateSchedule(
+      ScheduleDto(
+        name: scheduleInfo.name,
+        startDate: scheduleInfo.startDate,
+        endDate: scheduleInfo.endDate,
+        target: scheduleInfo.target,
+        description: scheduleInfo.description,
+      ),
+      scheduleId,
+    );
+  }
+  
+  @override
+  Future<void> deleteSchedule(String scheduleId) {
+    return _scheduleDataSource.deleteSchedule(scheduleId);
+  }
+  
+
 }

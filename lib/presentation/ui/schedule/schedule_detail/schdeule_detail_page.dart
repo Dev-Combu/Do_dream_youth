@@ -1,30 +1,104 @@
+import 'package:do_dream_youth/presentation/ui/schedule/schedule_create_update/schedule_create_update_page.dart';
+import 'package:do_dream_youth/presentation/ui/schedule/schedule_detail/schedule_delete_view_model.dart';
+import 'package:do_dream_youth/presentation/ui/schedule/schedule_view_model.dart';
+import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
-class SchdeuleDetailPage extends StatefulWidget {
+class SchdeuleDetailPage extends ConsumerStatefulWidget {
   const SchdeuleDetailPage({
     super.key,
+    required this.id,
     required this.name,
     required this.description,
     required this.startDate,
     required this.endDate,
     required this.target,
   });
+  final String id;
   final String name;
   final String description;
-  final String startDate;
-  final String endDate;
+  final DateTime startDate;
+  final DateTime endDate;
   final String target;
 
   @override
-  State<SchdeuleDetailPage> createState() => _SchdeuleDetailPageState();
+  ConsumerState<SchdeuleDetailPage> createState() => _SchdeuleDetailPageState();
 }
 
-class _SchdeuleDetailPageState extends State<SchdeuleDetailPage> {
+class _SchdeuleDetailPageState extends ConsumerState<SchdeuleDetailPage> {
+   String formattedDate(DateTime date) =>
+      DateFormat("yy년 MM월 dd일 hh:mm").format(date);
+  
+      
   @override
   Widget build(BuildContext context) {
+    String role = ref.read(userInfoViewModelProvider).value?.role ?? '';
     return Scaffold(
       backgroundColor: Colors.blue,
-      appBar: AppBar(backgroundColor: Colors.blue, title: const Text('일정 상세')),
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: const Text('일정 상세'),
+        actions: [
+          if (role == 'teacher') ...[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ScheduleCreateUpdatePage(
+                      id: widget.id,
+                      editing: true,
+                      name: widget.name,
+                      description: widget.description,
+                      startDate: widget.startDate,
+                      endDate: widget.endDate,
+                      target: widget.target,
+                    ),
+                  ),
+                );
+              },
+              child: Text(
+                '수정',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('일정 삭제'),
+                      content: Text('정말 이 일정을 삭제하시겠습니까?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            ref
+                                .read(scheduleDeleteViewModel.notifier)
+                                .deleteSchedule(widget.id);
+                            context.pop();
+                            context.pop();
+                          },
+                          child: Text('삭제'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('취소'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              icon: Icon(Icons.delete),
+            ),
+          ],
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
@@ -47,26 +121,26 @@ class _SchdeuleDetailPageState extends State<SchdeuleDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.name ?? '일정 이름 없음',
+                  widget.name,
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                Text(
+                      '대상: ${widget.target}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                 const SizedBox(height: 16),
-
                 Row(
                   children: [
                     Text(
-                      '기간: ${widget.startDate} ~ ${widget.endDate}',
+                      '${formattedDate(widget.startDate)} ~ ${formattedDate(widget.endDate)}',
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 8),
                     Spacer(),
-                    Text(
-                      '대상: ${widget.target}',
-                      style: const TextStyle(fontSize: 16),
-                    ),
+                    
                   ],
                 ),
                 Divider(height: 32, color: Colors.grey),

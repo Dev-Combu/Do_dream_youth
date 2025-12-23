@@ -12,4 +12,13 @@ class ScheduleUsecase {
   Future<void> createSchedule(ScheduleEntity scheduleInfo) async {
     return await _scheduleRepository.createSchedule(scheduleInfo);
   }
+
+  Future<void> updateSchedule(ScheduleEntity scheduleInfo, String scheduleId) async {
+    return await _scheduleRepository.updateSchedule(scheduleInfo, scheduleId);
+  }
+
+  Future<void> deleteSchedule(String scheduleId) async {
+    return await _scheduleRepository.deleteSchedule(scheduleId);
+  }
+
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ScheduleDto {
 
- String get name;@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime get startDate;@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime get endDate; String get target; String get description;
+@JsonKey(includeToJson: false) String? get id; String get name;@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime get startDate;@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime get endDate; String get target; String get description;
 /// Create a copy of ScheduleDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ScheduleDtoCopyWith<ScheduleDto> get copyWith => _$ScheduleDtoCopyWithImpl<Sche
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScheduleDto&&(identical(other.name, name) || other.name == name)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate)&&(identical(other.target, target) || other.target == target)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScheduleDto&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate)&&(identical(other.target, target) || other.target == target)&&(identical(other.description, description) || other.description == description));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,startDate,endDate,target,description);
+int get hashCode => Object.hash(runtimeType,id,name,startDate,endDate,target,description);
 
 @override
 String toString() {
-  return 'ScheduleDto(name: $name, startDate: $startDate, endDate: $endDate, target: $target, description: $description)';
+  return 'ScheduleDto(id: $id, name: $name, startDate: $startDate, endDate: $endDate, target: $target, description: $description)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ScheduleDtoCopyWith<$Res>  {
   factory $ScheduleDtoCopyWith(ScheduleDto value, $Res Function(ScheduleDto) _then) = _$ScheduleDtoCopyWithImpl;
 @useResult
 $Res call({
- String name,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime startDate,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime endDate, String target, String description
+@JsonKey(includeToJson: false) String? id, String name,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime startDate,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime endDate, String target, String description
 });
 
 
@@ -65,9 +65,10 @@ class _$ScheduleDtoCopyWithImpl<$Res>
 
 /// Create a copy of ScheduleDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? startDate = null,Object? endDate = null,Object? target = null,Object? description = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = null,Object? startDate = null,Object? endDate = null,Object? target = null,Object? description = null,}) {
   return _then(_self.copyWith(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,startDate: null == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
 as DateTime,endDate: null == endDate ? _self.endDate : endDate // ignore: cast_nullable_to_non_nullable
 as DateTime,target: null == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime endDate,  String target,  String description)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(includeToJson: false)  String? id,  String name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime endDate,  String target,  String description)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ScheduleDto() when $default != null:
-return $default(_that.name,_that.startDate,_that.endDate,_that.target,_that.description);case _:
+return $default(_that.id,_that.name,_that.startDate,_that.endDate,_that.target,_that.description);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.name,_that.startDate,_that.endDate,_that.target,_that.desc
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime endDate,  String target,  String description)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(includeToJson: false)  String? id,  String name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime endDate,  String target,  String description)  $default,) {final _that = this;
 switch (_that) {
 case _ScheduleDto():
-return $default(_that.name,_that.startDate,_that.endDate,_that.target,_that.description);case _:
+return $default(_that.id,_that.name,_that.startDate,_that.endDate,_that.target,_that.description);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +199,10 @@ return $default(_that.name,_that.startDate,_that.endDate,_that.target,_that.desc
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime endDate,  String target,  String description)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(includeToJson: false)  String? id,  String name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable)  DateTime endDate,  String target,  String description)?  $default,) {final _that = this;
 switch (_that) {
 case _ScheduleDto() when $default != null:
-return $default(_that.name,_that.startDate,_that.endDate,_that.target,_that.description);case _:
+return $default(_that.id,_that.name,_that.startDate,_that.endDate,_that.target,_that.description);case _:
   return null;
 
 }
@@ -213,9 +214,10 @@ return $default(_that.name,_that.startDate,_that.endDate,_that.target,_that.desc
 @JsonSerializable()
 
 class _ScheduleDto implements ScheduleDto {
-   _ScheduleDto({required this.name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) required this.startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) required this.endDate, required this.target, required this.description});
+   _ScheduleDto({@JsonKey(includeToJson: false) this.id, required this.name, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) required this.startDate, @JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) required this.endDate, required this.target, required this.description});
   factory _ScheduleDto.fromJson(Map<String, dynamic> json) => _$ScheduleDtoFromJson(json);
 
+@override@JsonKey(includeToJson: false) final  String? id;
 @override final  String name;
 @override@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) final  DateTime startDate;
 @override@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) final  DateTime endDate;
@@ -235,16 +237,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScheduleDto&&(identical(other.name, name) || other.name == name)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate)&&(identical(other.target, target) || other.target == target)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScheduleDto&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate)&&(identical(other.target, target) || other.target == target)&&(identical(other.description, description) || other.description == description));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,startDate,endDate,target,description);
+int get hashCode => Object.hash(runtimeType,id,name,startDate,endDate,target,description);
 
 @override
 String toString() {
-  return 'ScheduleDto(name: $name, startDate: $startDate, endDate: $endDate, target: $target, description: $description)';
+  return 'ScheduleDto(id: $id, name: $name, startDate: $startDate, endDate: $endDate, target: $target, description: $description)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$ScheduleDtoCopyWith<$Res> implements $ScheduleDtoCopyWith
   factory _$ScheduleDtoCopyWith(_ScheduleDto value, $Res Function(_ScheduleDto) _then) = __$ScheduleDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String name,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime startDate,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime endDate, String target, String description
+@JsonKey(includeToJson: false) String? id, String name,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime startDate,@JsonKey(fromJson: _toDateTimeNonNull, toJson: _fromDateTimeNullable) DateTime endDate, String target, String description
 });
 
 
@@ -272,9 +274,10 @@ class __$ScheduleDtoCopyWithImpl<$Res>
 
 /// Create a copy of ScheduleDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? startDate = null,Object? endDate = null,Object? target = null,Object? description = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = null,Object? startDate = null,Object? endDate = null,Object? target = null,Object? description = null,}) {
   return _then(_ScheduleDto(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,startDate: null == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
 as DateTime,endDate: null == endDate ? _self.endDate : endDate // ignore: cast_nullable_to_non_nullable
 as DateTime,target: null == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
