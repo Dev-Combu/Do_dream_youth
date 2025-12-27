@@ -156,7 +156,14 @@ class _LocalNotificationPageState extends State<LocalNotificationPage> {
                     )
                     .toList(),
               ),
-              Text(_selectedTopics.first),
+              if(_selectedTopics.isEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    '하나 이상의 대상을 선택하세요.',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
               const SizedBox(height: 16),
               TextField(
                 controller: _titleController,
