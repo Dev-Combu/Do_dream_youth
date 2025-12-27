@@ -24,6 +24,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAppCheck.instance.activate(
     androidProvider : AndroidProvider.debug,
+    appleProvider: AppleProvider.debug,
   );
   final notificationService = NotificationService();
   await notificationService.initFCM();
