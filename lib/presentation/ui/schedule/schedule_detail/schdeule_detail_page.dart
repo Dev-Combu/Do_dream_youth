@@ -148,6 +148,7 @@ class _SchdeuleDetailPageState extends ConsumerState<SchdeuleDetailPage> {
                   '설명: ${widget.description}',
                   style: const TextStyle(fontSize: 16),
                 ),
+                Text("id: ${widget.id}"),
               ],
             ),
           ),

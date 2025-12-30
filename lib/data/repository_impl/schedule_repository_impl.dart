@@ -14,6 +14,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository{
       return list
           .map(
             (e) => ScheduleEntity(
+              id: e.id,
               name: e.name,
               startDate: e.startDate,
               endDate: e.endDate,

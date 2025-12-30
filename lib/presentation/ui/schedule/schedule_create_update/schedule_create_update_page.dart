@@ -1,7 +1,5 @@
-import 'dart:math';
 
 import 'package:do_dream_youth/domain/entity/schedule_entity.dart';
-import 'package:do_dream_youth/presentation/ui/schedule/schedule_create_update/schedule_cu_view_model.dart';
 import 'package:do_dream_youth/presentation/ui/schedule/schedule_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -254,6 +252,7 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
                           expands: true,
                         ),
                       ),
+                      Text("id : ${widget.id ?? ''}"),
                     ],
                   ),
                 ),
