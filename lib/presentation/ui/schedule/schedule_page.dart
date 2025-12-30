@@ -152,7 +152,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SchdeuleDetailPage(
-                                  id: result.id ?? '',
+                                  id: result.id!,
                                   name: result.name,
                                   description: result.description,
                                   startDate: result.startDate,
