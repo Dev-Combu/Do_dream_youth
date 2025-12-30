@@ -47,9 +47,12 @@ class _PageAtHistoryStState extends ConsumerState<PageAtHistorySt> {
     return false;
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     final List<DateTime> sundays = getSundaysInMonth(year, month);
+    final int attendedCount = sundays.where((date) => atOrNot(date)).length;
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -110,7 +113,7 @@ class _PageAtHistoryStState extends ConsumerState<PageAtHistorySt> {
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(8.0),
-                color: Colors.blueAccent
+                color: Colors.blue[300],
               ),
               height: 100,
               child: Row(
@@ -119,9 +122,9 @@ class _PageAtHistoryStState extends ConsumerState<PageAtHistorySt> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('출석 일수', style: TextStyle(color: Colors.white),),
+                        Text('미사 일수', style: TextStyle(color: Colors.white),),
                         Text(
-                          '${min(sundays.length, 4)}일',
+                          '${sundays.length}일',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -137,23 +140,7 @@ class _PageAtHistoryStState extends ConsumerState<PageAtHistorySt> {
                       children: [
                         Text('출석 일수', style: TextStyle(color: Colors.white),),
                         Text(
-                          '${min(sundays.length, 4)}일',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('출석 일수', style: TextStyle(color: Colors.white),),
-                        Text(
-                          '${min(sundays.length, 4)}일',
+                          '$attendedCount일',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
