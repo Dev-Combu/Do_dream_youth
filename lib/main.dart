@@ -6,6 +6,7 @@ import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,8 +24,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAppCheck.instance.activate(
-    androidProvider : AndroidProvider.debug,
-    appleProvider: AppleProvider.debug,
+    androidProvider: kReleaseMode
+        ? AndroidProvider.playIntegrity
+        : AndroidProvider.debug,
+
+    appleProvider: kReleaseMode
+        ? AppleProvider.deviceCheck
+        : AppleProvider.debug,
   );
   final notificationService = NotificationService();
   await notificationService.initFCM();
