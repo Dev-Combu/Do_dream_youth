@@ -7,9 +7,16 @@ class AppTheme {
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
       fillColor: Color.fromARGB(255, 206, 246, 248),
-      border: OutlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
         borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide(
+          color: Colors.black,
+          width: 1,
+        ),
       ),
     ),
     scaffoldBackgroundColor: Colors.white,
@@ -45,6 +52,19 @@ class AppTheme {
         fontWeight: FontWeight.w600,
       ),
       backgroundColor: Colors.blue,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blue[200],
+        foregroundColor: Colors.white,
+        textStyle: TextStyle(
+          fontFamily: 'Pretendard',
+          fontWeight: FontWeight.w600,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
     ),
   );
 }

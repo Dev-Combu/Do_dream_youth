@@ -252,7 +252,6 @@ class _ScheduleCreateUpdatePageState extends ConsumerState<ScheduleCreateUpdateP
                           expands: true,
                         ),
                       ),
-                      Text("id : ${widget.id ?? ''}"),
                     ],
                   ),
                 ),

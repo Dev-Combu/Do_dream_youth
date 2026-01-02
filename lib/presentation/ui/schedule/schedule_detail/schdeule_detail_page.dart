@@ -140,15 +140,13 @@ class _SchdeuleDetailPageState extends ConsumerState<SchdeuleDetailPage> {
                     ),
                     const SizedBox(height: 8),
                     Spacer(),
-                    
                   ],
                 ),
                 Divider(height: 32, color: Colors.grey),
                 Text(
-                  '설명: ${widget.description}',
+                  widget.description,
                   style: const TextStyle(fontSize: 16),
                 ),
-                Text("id: ${widget.id}"),
               ],
             ),
           ),

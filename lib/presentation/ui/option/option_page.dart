@@ -20,7 +20,6 @@ class OptionPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(16),
         children: [
-          Divider(),
           Container(
             margin: EdgeInsets.only(bottom: 8.0),
             child: SizedBox(
@@ -110,11 +109,34 @@ class OptionPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () async {
-              await FirebaseAuth.instance.signOut();
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('로그아웃'),
+                      content: Text('정말 로그아웃 하시겠습니까?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () async{
+                            await FirebaseAuth.instance.signOut();
+                          },
+                          child: Text('로그아웃'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('취소'),
+                        ),
+                      ],
+                    );
+                  },
+                );
             },
             child: Text('로그아웃'),
           ),
