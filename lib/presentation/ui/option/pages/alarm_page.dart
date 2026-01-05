@@ -1,14 +1,40 @@
+import 'package:do_dream_youth/presentation/config/notifications/notification_view_model.dart';
+import 'package:do_dream_youth/presentation/config/user_info/user_info_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AlarmPage extends StatefulWidget {
+class AlarmPage extends ConsumerStatefulWidget {
   const AlarmPage({super.key});
 
   @override
-  State<AlarmPage> createState() => _AlarmPageState();
+  ConsumerState<AlarmPage> createState() => _AlarmPageState();
 }
 
-class _AlarmPageState extends State<AlarmPage> {
+class _AlarmPageState extends ConsumerState<AlarmPage> {
   bool isChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeNotificationStatus();
+  }
+
+  Future<void> initializeNotificationStatus() async {
+    final notificationsStatus = await ref.read(notificationViewModelProvider.notifier).getNotificationStatus();
+    setState(() {
+      isChecked = notificationsStatus;
+    });
+  }
+
+  Future<void> updateAllAndSync(bool isEnabled) async {
+    setState(() {
+      isChecked = isEnabled;
+    });
+    await ref
+        .read(notificationViewModelProvider.notifier)
+        .updateAllAndSync(isEnabled);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +52,8 @@ class _AlarmPageState extends State<AlarmPage> {
           child: Switch(
             value: isChecked,
             onChanged: (value) {
-              setState(() {
-                isChecked = value;
-              });
+              updateAllAndSync(value);
+
             },
           ),
         ),
