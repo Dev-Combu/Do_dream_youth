@@ -1,5 +1,5 @@
 import 'package:do_dream_youth/presentation/ui/auth/login/log_in_view_model.dart';
-import 'package:do_dream_youth/presentation/ui/widgets/user_info/user_info_view_model.dart';
+import 'package:do_dream_youth/presentation/config/user_info/user_info_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
