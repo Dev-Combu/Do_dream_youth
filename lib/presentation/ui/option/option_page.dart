@@ -4,7 +4,6 @@ import 'package:do_dream_youth/presentation/ui/option/pages/notice_page.dart';
 import 'package:do_dream_youth/presentation/ui/option/pages/theme_setting_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 
