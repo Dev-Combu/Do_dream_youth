@@ -1,5 +1,7 @@
+import 'package:do_dream_youth/data/dto/guest_user_info_dto.dart';
 import 'package:do_dream_youth/data/dto/user_info_dto.dart';
 import 'package:do_dream_youth/data/source/user_info_data_source.dart';
+import 'package:do_dream_youth/domain/entity/guest_info_entity.dart';
 import 'package:do_dream_youth/domain/entity/user_info_entity.dart';
 import 'package:do_dream_youth/domain/repository/user_info_repository.dart';
 import 'package:logger/logger.dart';
@@ -42,6 +44,19 @@ class UserInfoRepositoryImpl implements UserInfoRepository {
   }
 
   @override
+  Future<void> createGuestInfo(GuestInfoEntity guestInfo) {
+    final guestDto = GuestUserInfoDto(
+      role: guestInfo.role,
+      name: guestInfo.name,
+      christianName: guestInfo.christianName,
+      phoneNumber: guestInfo.phoneNumber,
+    );
+    return _userInfoDataSource.createGuestInfo(guestDto);
+  }
+
+
+
+  @override
   Stream<UserInfoEntity?> getUserInfoStream() {
     return _userInfoDataSource.getUserInfoStream().map((userInfoDto) {
       if (userInfoDto == null) {
@@ -53,15 +68,15 @@ class UserInfoRepositoryImpl implements UserInfoRepository {
 
       if (userInfoDto.role == 'student') {
         profileEntity = StudentProfileEntity(
-          school: p['school'] ?? '',
-          grade: p['grade'] ?? '',
-          guardian: p['guardian'] ?? '',
-          guardianPhoneNumber: p['guardianPhoneNumber'] ?? '',
+          school: p?['school'] ?? '',
+          grade: p?['grade'] ?? '',
+          guardian: p?['guardian'] ?? '',
+          guardianPhoneNumber: p?['guardianPhoneNumber'] ?? '',
         );
       } else{
         profileEntity = TeacherProfileEntity(
-          grade: p['grade'] ?? '',
-          careerYears: p['careerYears'] ?? 0,
+          grade: p?['grade'] ?? '',
+          careerYears: p?['careerYears'] ?? 0,
         );
       }
 
@@ -85,15 +100,15 @@ class UserInfoRepositoryImpl implements UserInfoRepository {
 
     if (userInfoDto.role == 'student') {
       profileEntity = StudentProfileEntity(
-        school: p['school'] ?? '',
-        grade: p['grade'] ?? '',
-        guardian: p['guardian'] ?? '',
-        guardianPhoneNumber: p['guardianPhoneNumber'] ?? '',
+        school: p?['school'] ?? '',
+        grade: p?['grade'] ?? '',
+        guardian: p?['guardian'] ?? '',
+        guardianPhoneNumber: p?['guardianPhoneNumber'] ?? '',
       );
     } else{
       profileEntity = TeacherProfileEntity(
-        grade: p['grade'] ?? '',
-        careerYears: p['careerYears'] ?? 0,
+        grade: p?['grade'] ?? '',
+        careerYears: p?['careerYears'] ?? 0,
       );
     }
 

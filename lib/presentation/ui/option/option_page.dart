@@ -1,10 +1,10 @@
 import 'package:do_dream_youth/presentation/ui/option/pages/alarm_page.dart';
 import 'package:do_dream_youth/presentation/ui/option/pages/app_version_page.dart';
+import 'package:do_dream_youth/presentation/ui/option/pages/my_info_page.dart';
 import 'package:do_dream_youth/presentation/ui/option/pages/notice_page.dart';
 import 'package:do_dream_youth/presentation/ui/option/pages/theme_setting_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 
 class OptionPage extends StatelessWidget {
@@ -25,7 +25,10 @@ class OptionPage extends StatelessWidget {
               width: double.infinity,
               child: GestureDetector(
                 onTap: () {
-                  context.go('/my_info');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyInfoPage()),
+                  );
                 },
                 child: Text(
                   '내 정보 보기',

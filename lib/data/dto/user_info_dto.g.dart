@@ -11,8 +11,8 @@ _UserInfoDto _$UserInfoDtoFromJson(Map<String, dynamic> json) => _UserInfoDto(
   name: json['name'] as String,
   christianName: json['christianName'] as String,
   phoneNumber: json['phoneNumber'] as String,
-  department: json['department'] as String,
-  profile: json['profile'] as Map<String, dynamic>,
+  department: json['department'] as String?,
+  profile: json['profile'] as Map<String, dynamic>?,
 );
 
 Map<String, dynamic> _$UserInfoDtoToJson(_UserInfoDto instance) =>

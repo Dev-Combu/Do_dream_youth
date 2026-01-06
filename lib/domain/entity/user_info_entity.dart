@@ -4,16 +4,16 @@ class UserInfoEntity {
   final String name;
   final String christianName;
   final String phoneNumber;
-  final String department;
-  final Profile profile;
+  final String? department;
+  final Profile? profile;
 
   UserInfoEntity({
     required this.role,
     required this.name,
     required this.christianName,
     required this.phoneNumber,
-    required this.department,
-    required this.profile
+    this.department,
+    this.profile
   });
 }
 

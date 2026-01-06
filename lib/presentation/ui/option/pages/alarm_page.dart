@@ -49,12 +49,36 @@ class _AlarmPageState extends ConsumerState<AlarmPage> {
             border: Border.all(),
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Switch(
-            value: isChecked,
-            onChanged: (value) {
-              updateAllAndSync(value);
-
-            },
+          child: IntrinsicHeight(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Row(
+                children: [
+                  Text('전체 알림 설정'),
+                  Spacer(),
+                  Text(!isChecked ? '켜짐' : '꺼짐'),
+                  VerticalDivider(
+                    color: Colors.grey, // 선 색상
+                    thickness: 1, // 선 두께
+                    width: 20, // 선 양옆의 여백을 포함한 전체 너비
+                    indent: 10, // 위쪽 여백
+                    endIndent: 10, // 아래쪽 여백
+                  ),
+                  Switch(
+                    value: isChecked,
+                    onChanged: (value) {
+                      updateAllAndSync(value);
+                    },
+                    // 켜졌을 때 설정
+                    activeColor: Colors.grey, // 켜진 상태의 동그라미(핸들) 색상
+                    activeTrackColor: Colors.black12, // 켜진 상태의 배경(트랙) 색상
+                    // 꺼졌을 때 설정 (필요시)
+                    inactiveThumbColor: Colors.white, // 꺼진 상태의 동그라미 색상
+                    inactiveTrackColor: Colors.blue, // 꺼진 상태의 배경 색상
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

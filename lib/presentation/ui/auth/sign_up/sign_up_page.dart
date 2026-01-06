@@ -49,7 +49,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
           },
           icon: Icon(Icons.arrow_back_ios_new),
         ),
-        title: Text(widget.role == 'teacher' ? '교사 회원가입' : '학생 회원가입'),
+        title: Text(
+          widget.role == 'teacher'
+              ? '교사 회원가입'
+              : (widget.role == 'student' ? '학생 회원가입' : '일반/방문객 회원가입'),
+        ),
       ),
       body: SafeArea(
         child: Center(
