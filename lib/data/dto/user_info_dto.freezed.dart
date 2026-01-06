@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserInfoDto {
 
- String get role; String get name; String get christianName; String get phoneNumber; String get department; Map<String, dynamic> get profile;
+ String get role; String get name; String get christianName; String get phoneNumber; String? get department; Map<String, dynamic>? get profile;
 /// Create a copy of UserInfoDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserInfoDtoCopyWith<$Res>  {
   factory $UserInfoDtoCopyWith(UserInfoDto value, $Res Function(UserInfoDto) _then) = _$UserInfoDtoCopyWithImpl;
 @useResult
 $Res call({
- String role, String name, String christianName, String phoneNumber, String department, Map<String, dynamic> profile
+ String role, String name, String christianName, String phoneNumber, String? department, Map<String, dynamic>? profile
 });
 
 
@@ -65,15 +65,15 @@ class _$UserInfoDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserInfoDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = null,Object? profile = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = freezed,Object? profile = freezed,}) {
   return _then(_self.copyWith(
 role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,christianName: null == christianName ? _self.christianName : christianName // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
-as String,department: null == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
-as String,profile: null == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as String,department: freezed == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
+as String?,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,
   ));
 }
 
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String role,  String name,  String christianName,  String phoneNumber,  String department,  Map<String, dynamic> profile)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String role,  String name,  String christianName,  String phoneNumber,  String? department,  Map<String, dynamic>? profile)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserInfoDto() when $default != null:
 return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
@@ -179,7 +179,7 @@ return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String role,  String name,  String christianName,  String phoneNumber,  String department,  Map<String, dynamic> profile)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String role,  String name,  String christianName,  String phoneNumber,  String? department,  Map<String, dynamic>? profile)  $default,) {final _that = this;
 switch (_that) {
 case _UserInfoDto():
 return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
@@ -199,7 +199,7 @@ return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String role,  String name,  String christianName,  String phoneNumber,  String department,  Map<String, dynamic> profile)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String role,  String name,  String christianName,  String phoneNumber,  String? department,  Map<String, dynamic>? profile)?  $default,) {final _that = this;
 switch (_that) {
 case _UserInfoDto() when $default != null:
 return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_that.department,_that.profile);case _:
@@ -214,19 +214,21 @@ return $default(_that.role,_that.name,_that.christianName,_that.phoneNumber,_tha
 @JsonSerializable()
 
 class _UserInfoDto implements UserInfoDto {
-  const _UserInfoDto({required this.role, required this.name, required this.christianName, required this.phoneNumber, required this.department, required final  Map<String, dynamic> profile}): _profile = profile;
+  const _UserInfoDto({required this.role, required this.name, required this.christianName, required this.phoneNumber, this.department, final  Map<String, dynamic>? profile}): _profile = profile;
   factory _UserInfoDto.fromJson(Map<String, dynamic> json) => _$UserInfoDtoFromJson(json);
 
 @override final  String role;
 @override final  String name;
 @override final  String christianName;
 @override final  String phoneNumber;
-@override final  String department;
- final  Map<String, dynamic> _profile;
-@override Map<String, dynamic> get profile {
+@override final  String? department;
+ final  Map<String, dynamic>? _profile;
+@override Map<String, dynamic>? get profile {
+  final value = _profile;
+  if (value == null) return null;
   if (_profile is EqualUnmodifiableMapView) return _profile;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_profile);
+  return EqualUnmodifiableMapView(value);
 }
 
 
@@ -263,7 +265,7 @@ abstract mixin class _$UserInfoDtoCopyWith<$Res> implements $UserInfoDtoCopyWith
   factory _$UserInfoDtoCopyWith(_UserInfoDto value, $Res Function(_UserInfoDto) _then) = __$UserInfoDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String role, String name, String christianName, String phoneNumber, String department, Map<String, dynamic> profile
+ String role, String name, String christianName, String phoneNumber, String? department, Map<String, dynamic>? profile
 });
 
 
@@ -280,15 +282,15 @@ class __$UserInfoDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserInfoDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = null,Object? profile = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? role = null,Object? name = null,Object? christianName = null,Object? phoneNumber = null,Object? department = freezed,Object? profile = freezed,}) {
   return _then(_UserInfoDto(
 role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,christianName: null == christianName ? _self.christianName : christianName // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
-as String,department: null == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
-as String,profile: null == profile ? _self._profile : profile // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as String,department: freezed == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
+as String?,profile: freezed == profile ? _self._profile : profile // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,
   ));
 }
 

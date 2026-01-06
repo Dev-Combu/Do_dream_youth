@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:do_dream_youth/data/dto/guest_user_info_dto.dart';
 import 'package:do_dream_youth/data/dto/user_info_dto.dart';
 import 'package:do_dream_youth/data/source/user_info_data_source.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +33,28 @@ class UserInfoDataSourceImpl implements UserInfoDataSource {
       log.i('e: $e, stack: $stackTrace');
     }
   }
+
+  @override
+  Future<void> createGuestInfo(GuestUserInfoDto guestInfo) async {
+    log.i('createUserInfo called');
+    try {
+      final doc = await _firestore
+          .collection('user_info')
+          .doc(_auth.currentUser?.uid)
+          .get();
+      log.e(guestInfo.toJson());
+      if (!doc.exists) {
+        await _firestore
+            .collection('user_info')
+            .doc(_auth.currentUser?.uid)
+            .set(guestInfo.toJson());
+        return;
+      }
+    } catch (e, stackTrace) {
+      log.i('e: $e, stack: $stackTrace');
+    }
+  }
+
 
   @override
   Stream<UserInfoDto?> getUserInfoStream() {
