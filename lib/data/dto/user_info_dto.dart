@@ -10,8 +10,8 @@ abstract class UserInfoDto with _$UserInfoDto {
   required String name,
   required String christianName,
   required String phoneNumber,
-  required String department,
-  required Map<String, dynamic> profile,
+  String? department,
+  Map<String, dynamic>? profile,
 }) = _UserInfoDto;
 factory UserInfoDto.fromJson(Map<String, dynamic> json) =>
       _$UserInfoDtoFromJson(json);
