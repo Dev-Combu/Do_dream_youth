@@ -56,6 +56,7 @@ class MyApp extends ConsumerWidget {
       },
       data: (userInfo) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           title: 'Do_Dream_Youth',
           routerConfig: router,
           theme: AppTheme.lightTheme,
